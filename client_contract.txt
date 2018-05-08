@@ -1,0 +1,73 @@
+Client Contract
+Between STUMP and VK Enterprises
+  
+
+               Stump                                   VK Enterprises
+    Project Lead - Nathan Henry                VK CEO  -  Valentina Krasteva (client)
+ Project Member - Jake Goodman
+
+
+
+
+Proposed Software Title: 
+Internet Investigator
+
+
+Target Audience:
+This game will be targeted towards people of ages 12-14. The game will not have anything that would restrict someone younger from playing it, though online predators is a very serious subject that would be better handled by kids slightly older. The difficulty and language complexity in the game will be catered to 12-14 year old kids.
+
+
+The Game:
+Internet Investigator is a one-player puzzle and logic-based detective game, in which the user finds internet predators disguised as kids on social media. In the game, you play as a young kid that just started middle school and got his/her first social media account. Being anti-social, the kid adds many friends on social media as an attempt to make more friends at his school. However, the kid’s older brother warns that you should be careful of who you add on social media because there are many predators on social media disguised as kids. Then the game commences. 
+
+
+Each of six levels will involve a different group of people that the kid has added, in which the user must figure out who is not who they say they are and is in actuality an internet predator. 
+
+
+There will be two types of levels, profile levels and chat levels. 
+
+
+Profile levels:
+Profile levels will require the user to look through profiles, each consisting of an about section, a timeline, and photos. The user’s job is to look for discrepancies, while also searching for common signs of predators, as shown in the instructions.
+
+
+
+
+Chat levels:
+Chat levels take place in a group chat. One of the people in this chatroom is an online predator, though only your character and your character’s brother knows that. In this level, you will get the chance to “interrogate” members of the chat with a set of drop-down options. However, you will only get a certain number of questions to ask before people start to think that your are interrogating them and you must decide who the predator is. When asking questions, you start by selecting who you want to ask, followed by the question.
+
+
+Levels will start easy and get progressively harder. To avoid the user from getting stuck, when a key event happens or the user stumbles upon an important piece of information, the user will receive a hint from his/her character’s older brother. These hints will be formatted as “Maybe you should...”, “That’s suspicious.”, “Try looking into that.”, etc. Though, occasionally, these hints will be there to mislead the user. 
+
+
+Some puzzles will hint the user to fact-check people or their information through your browser, so when playing the game, at some points the user will be using multiple windows, only one of which being the game. For example, there will be a level, in which one of the character profiles contains a picture of his/her room and if you select that photo, you will be told to Google whether that photo is a stock-photo. At this point, the user will either reverse-image search the photo, or research “room stock photo” and the picture will be on the first page of search results.
+
+
+At any time in each type of level, you can select who you think is the predator. The user’s character then unfriends them and will move on to the next level. However, in chat levels, if the user runs out of questions, the level will end and the user will need to pick who the predator is. Whether or not the user completes a level with the correct choice, the user will still move on the next level, though if the user guesses wrong at the end of a level, that will affect the user’s end of game score. There will be a high scores option in the main menu where the user can view the 10 highest scores.
+
+
+The main game will take place on one screen, in which you will be able to either switch between profiles in a profile level, or it will be one constant chat-group screen through the level if it is a chat level. 
+
+
+Education Integration And Focus:
+In the instructions to the game, there will be a section in which the user will learn the signs of an internet predator and some statistics regarding internet safety. The actual game will be putting the user’s knowledge to the test while giving the user experience identifying internet predators. The focus of this game is surrounding internet safety and online predator awareness.
+Potential Updates
+If everything goes as planned and we are able to implement everything outlined, we will be able to add more to the game. This may include, more levels, more complexity to already existing levels, an extended story, sound effects, voice acting for hints, and/or bettering the graphics/overall aesthetics. Another idea to implement if we have time is a secondary hint system in which the user has a finite amount of hints. These finite hints will never be misleading and will need to be budgeted by the user throughout the game to use only when the user gets completely stuck. One more thing that may be added is a notepad window in the game that will open and close, allowing the user to take notes as the user finds clues.
+
+
+
+
+
+
+I commit to complete what is outlined in this contract by the required due dates.
+
+
+
+
+Project Lead Signature ________________, Date ___________________
+
+
+Project Member Signature ________________, Date ___________________
+
+
+          Client Signature ________________, Date ___________________
