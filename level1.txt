@@ -1,0 +1,65 @@
+Abby, Normal:
+    Bio:
+        Hello! I am 12 years old and I go to Middle School Junior High. I am excited to learn new things and meet
+        great friends. My favorite subjects in school are art, drama, and english. My hobbies include: musical theatre,
+        chess, sketching, and figure skating. Message me if we have any common interests!
+
+        Profile Picture:
+            - typical grade 7 photo
+
+    Photos:
+        - girl with chess medal
+        - sketches that look semi good
+        - a photo of her in a play
+
+    Timeline, in chronological order:
+        - Photo: sketch
+          Caption: First Post!
+
+        - Photo: grade 6 graduation
+          Caption: I had a great time a Elementary School Public Education Centre For Children! Excited for next year!
+
+        - Post: Yay! School starts in less than a week!
+
+        - Photo: picture of the school
+          Caption: First day! I'm soooo excited!!!!!
+
+        - Photo: chess club sign up sheet
+          Caption: Signed up for chess club. Message me if you joined!
+
+
+Billy, Normal:
+    Bio:
+        Chess is the gymnasium of the mind.
+
+        Profile Pic:
+            - kid playing chess
+
+    Photos:
+        - chess photos; this kid's life is chess
+
+
+    Timeline:
+        - Photo: kid at top of podium at chess competition
+          Caption: Thanks to everyone who made this possible! I am looking forward to next year!
+
+        - Photo: classroom
+          Caption: First day of Middle School Junior High
+
+
+Caleb, Predator:
+    Bio:
+        I love soccer, hockey, chess and math!
+
+        Profile Pic:
+            - kid playing soccer
+
+    Photos:
+        - generic sports photos
+
+    Timeline:
+        - Photo: soccer team
+          Caption: Great season boys!
+
+        - Photo: school
+          Caption: Excited for my first day of middle school!
