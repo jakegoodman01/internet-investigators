@@ -4,7 +4,7 @@ Abby, Normal:
         great friends. My favorite subjects in school are art, drama, and english. My hobbies include: musical theatre,
         chess, sketching, and figure skating. Message me if we have any common interests!
 
-        Profile Picture:
+        Profile Photo:
             - typical grade 7 photo
 
     Photos:
@@ -21,7 +21,7 @@ Abby, Normal:
 
         - Post: Yay! School starts in less than a week!
 
-        - Photo: picture of the school
+        - Photo: photo of the school
           Caption: First day! I'm soooo excited!!!!!
 
         - Photo: chess club sign up sheet
