@@ -14,18 +14,18 @@ Abby, Normal:
 
     Timeline, in chronological order:
         - Photo: sketch
-          Caption: First Post!
+          TextArea: First Post!
 
         - Photo: grade 6 graduation
-          Caption: I had a great time a Elementary School Public Education Centre For Children! Excited for next year!
+          TextArea: I had a great time a Elementary School Public Education Centre For Children! Excited for next year!
 
         - Post: Yay! School starts in less than a week!
 
         - Photo: photo of the school
-          Caption: First day! I'm soooo excited!!!!!
+          TextArea: First day! I'm soooo excited!!!!!
 
         - Photo: chess club sign up sheet
-          Caption: Signed up for chess club. Message me if you joined!
+          TextArea: Signed up for chess club. Message me if you joined!
 
 
 Billy, Normal:
@@ -41,10 +41,10 @@ Billy, Normal:
 
     Timeline:
         - Photo: kid at top of podium at chess competition
-          Caption: Thanks to everyone who made this possible! I am looking forward to next year!
+          TextArea: Thanks to everyone who made this possible! I am looking forward to next year!
 
         - Photo: classroom
-          Caption: First day of Middle School Junior High
+          TextArea: First day of Middle School Junior High
 
 
 Caleb, Predator:
@@ -59,7 +59,7 @@ Caleb, Predator:
 
     Timeline:
         - Photo: soccer team
-          Caption: Great season boys!
+          TextArea: Great season boys!
 
         - Photo: school
-          Caption: Excited for my first day of middle school!
+          TextArea: Excited for my first day of middle school!

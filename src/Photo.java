@@ -34,7 +34,17 @@ public class Photo extends HBox {
         this.getChildren().addAll(imageView, this.textArea);
     }
 
+
+
     public TextArea getTextArea() {
         return textArea;
+    }
+
+    public void addComment(Person person, String comment) {
+        textArea.addComment(person, comment);
+    }
+
+    public void addComments(Person[] people, String[] comments) {
+        textArea.addComments(people, comments);
     }
 }
