@@ -11,9 +11,9 @@ public class TextArea extends ScrollPane {
     public TextArea(String caption, double photoHeight) {
         super();
 
-        Rectangle rect = new Rectangle(400, photoHeight, Color.LIGHTGRAY);
+        Rectangle rect = new Rectangle(350, photoHeight, Color.LIGHTGRAY);
         Text text = new Text();
-        text.setWrappingWidth(400);
+        text.setWrappingWidth(280);
         text.setTextAlignment(TextAlignment.JUSTIFY);
         text.setText(caption);
         text.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
@@ -29,5 +29,12 @@ public class TextArea extends ScrollPane {
         this.setContent(content);
     }
 
+    public void addComment(Person person, String comment) {
+        Text text = new Text();
+        text.setWrappingWidth(280);
+        text.setTextAlignment(TextAlignment.JUSTIFY);
+        text.setText(String.format("%s: %s", person, comment));
+        text.setFont(Font.font("Verdana", FontWeight.NORMAL, 9));
+    }
 
 }
