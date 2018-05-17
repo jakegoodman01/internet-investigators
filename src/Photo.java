@@ -5,7 +5,7 @@ import javafx.scene.layout.HBox;
 public class Photo extends HBox {
     private ImageView imageView;
     private Image image;
-    private Caption caption;
+    private TextArea textArea;
 
     public Photo(String link) {
         super();
@@ -30,11 +30,11 @@ public class Photo extends HBox {
         imageView = new ImageView(image);
         imageView.setPreserveRatio(true);
         imageView.setFitHeight(height);
-        this.caption = new Caption(caption, imageView.getFitHeight());
-        this.getChildren().addAll(imageView, this.caption);
+        this.textArea = new TextArea(caption, imageView.getFitHeight());
+        this.getChildren().addAll(imageView, this.textArea);
     }
 
-    public Caption getCaption() {
-        return caption;
+    public TextArea getTextArea() {
+        return textArea;
     }
 }
