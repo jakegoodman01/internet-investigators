@@ -9,10 +9,10 @@ public abstract class Post extends HBox {
     private int numLikes;
     private ArrayList<Person> peopleLiked;
 
-    public Post (int year, int month, int date)
+    public Post (int year, int month, int day)
     {
         super();
-        postingDate = new Date(year, month, date);
+        postingDate = new Date(year, month, day);
         numLikes = 0;
         peopleLiked = new ArrayList<Person>();
     }
@@ -34,5 +34,18 @@ public abstract class Post extends HBox {
             numLikes++;
             peopleLiked.add(p);
         }
+    }
+
+    public int getNumLikes() {
+        return numLikes;
+    }
+
+    // Returns a list of the names of the people who liked this post
+    public ArrayList<String> getPeopleLiked() {
+        ArrayList<String> people = new ArrayList<>();
+        for (Person p : peopleLiked) {
+            people.add(p.getName());
+        }
+        return people;
     }
 }
