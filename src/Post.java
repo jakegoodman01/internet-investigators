@@ -29,6 +29,10 @@ public abstract class Post extends HBox {
         numLikes++;
     }
 
+    public Date getPostingDate() {
+        return postingDate;
+    }
+
     public void addLikes(Person[] people)
     {
         for (Person p : people)

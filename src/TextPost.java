@@ -8,6 +8,10 @@ public class TextPost extends Post {
         this.text = text;
     }
 
+    public TextArea getText() {
+        return text;
+    }
+
     @Override
     public HBox timelineView() {
         return null;
