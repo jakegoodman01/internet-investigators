@@ -2,6 +2,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -10,24 +11,33 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
+import java.util.Date;
+
 
 public class PicturePost extends Post{
     private Photo photo;
     private Text numLikes;
     private final Photo timelineView;
 
-    public PicturePost (int year, int month, int day, Photo photo) {
-        super(year, month, day);
+    public PicturePost (Date postingDate, Photo photo) {
+        super(postingDate);
 
         timelineView = new Photo(photo.getLink(), 100, photo.getTextArea().getCaption());
 
         StackPane stackPane = new StackPane();
         this.photo = photo;
 
+        Rectangle dateBox = new Rectangle();
+        dateBox.setFill(Color.WHITESMOKE);
+        dateBox.setWidth(150);
+        dateBox.setHeight(40);
+
+        Text date = new Text(super.formatDate());
+        date.setFont(new Font(25));
+        date.setWrappingWidth(150);
+
         Rectangle likeBox = new Rectangle();
         likeBox.setFill(Color.WHITESMOKE);
-        likeBox.setX(100);
-        likeBox.setY(150);
         likeBox.setWidth(100);
         likeBox.setHeight(40);
 
@@ -54,7 +64,9 @@ public class PicturePost extends Post{
         likeImage.getChildren().add(numLikes);
 
         StackPane.setAlignment(likeBox, Pos.BOTTOM_LEFT);
-        stackPane.getChildren().addAll(photo, likeBox, likeImage);
+        StackPane.setAlignment(dateBox, Pos.TOP_LEFT);
+        StackPane.setAlignment(date, Pos.TOP_LEFT);
+        stackPane.getChildren().addAll(photo, likeBox, likeImage, dateBox, date);
 
         this.getChildren().add(stackPane);
     }

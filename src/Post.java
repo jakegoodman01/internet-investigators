@@ -9,12 +9,19 @@ public abstract class Post extends HBox {
     private int numLikes;
     private ArrayList<Person> peopleLiked;
 
-    public Post (int year, int month, int day)
-    {
+    public Post(Date postingDate) {
         super();
-        postingDate = new Date(year, month, day);
+        this.postingDate = postingDate;
         numLikes = 0;
-        peopleLiked = new ArrayList<Person>();
+        peopleLiked = new ArrayList<>();
+    }
+
+    public String formatDate() {
+        String dateAsString = postingDate.toString();
+        int firstSpace = dateAsString.indexOf(' ');
+        int secondSpace = dateAsString.indexOf(' ', firstSpace + 1);
+        int thirdSpace = dateAsString.indexOf(' ', secondSpace + 1);
+        return dateAsString.substring(0, thirdSpace);
     }
 
     public abstract HBox timelineView();
@@ -23,8 +30,7 @@ public abstract class Post extends HBox {
 
     public abstract void addComments(Person[] people, String[] comments);
 
-    public void addLike(Person person)
-    {
+    public void addLike(Person person) {
         peopleLiked.add(person);
         numLikes++;
     }
@@ -33,10 +39,8 @@ public abstract class Post extends HBox {
         return postingDate;
     }
 
-    public void addLikes(Person[] people)
-    {
-        for (Person p : people)
-        {
+    public void addLikes(Person[] people) {
+        for (Person p : people) {
             numLikes++;
             peopleLiked.add(p);
         }

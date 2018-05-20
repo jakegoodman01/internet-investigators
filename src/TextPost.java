@@ -1,10 +1,12 @@
 import javafx.scene.layout.HBox;
 
+import java.util.Date;
+
 public class TextPost extends Post {
     TextArea text;
 
-    public TextPost (int year, int month, int date, TextArea text) {
-        super(year, month, date);
+    public TextPost (Date postingDate, TextArea text) {
+        super(postingDate);
         this.text = text;
     }
 

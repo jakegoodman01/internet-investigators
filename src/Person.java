@@ -10,9 +10,7 @@ public class Person {
         this.profilePic = profilePic;
     }
 
-    public String getName() {
-        return name;
-    }
+    public String getName() { return name; }
 
     public String getBio() {
         return bio;
@@ -25,4 +23,6 @@ public class Person {
     public Photo[] getPhotos() {
         return photos;
     }
+
+    public String getFirstName() { return name.substring(0, name.indexOf(' ')); }
 }

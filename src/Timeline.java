@@ -16,7 +16,7 @@ public class Timeline extends VBox {
     public Timeline(Person person) {
         super();
         this.person = person;
-        Label title = new Label(String.format("%s's Timeline", person.getName()));
+        Label title = new Label(String.format("%s's Timeline", person.getFirstName()));
         title.setTextAlignment(TextAlignment.CENTER);
         title.setFont(Font.font("Verdana", FontWeight.BOLD, 50));
 
@@ -29,11 +29,9 @@ public class Timeline extends VBox {
         box.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             Post p;
             if (post instanceof PicturePost) {
-                p = new PicturePost(post.getPostingDate().getYear(), post.getPostingDate().getMonth(),
-                        post.getPostingDate().getDay(), ((PicturePost) post).getPhoto());
+                p = new PicturePost(post.getPostingDate(), ((PicturePost) post).getPhoto());
             } else {
-                p = new TextPost(post.getPostingDate().getYear(), post.getPostingDate().getMonth(),
-                        post.getPostingDate().getDay(), ((TextPost) post).getText());
+                p = new TextPost(post.getPostingDate(), ((TextPost) post).getText());
             }
             Scene scene = new Scene(p);
             Stage stage = new Stage();
