@@ -6,9 +6,11 @@ public class Photo extends HBox {
     private ImageView imageView;
     private Image image;
     private TextArea textArea;
+    private String link;
 
     public Photo(String link) {
         super();
+        this.link = link;
         image = new Image(link);
         imageView = new ImageView(image);
         imageView.setPreserveRatio(true);
@@ -17,6 +19,7 @@ public class Photo extends HBox {
 
     public Photo(String link, int height) {
         super();
+        this.link = link;
         image = new Image(link);
         imageView = new ImageView(image);
         imageView.setPreserveRatio(true);
@@ -26,6 +29,7 @@ public class Photo extends HBox {
 
     public Photo(String link, int height, String caption) {
         super();
+        this.link = link;
         image = new Image(link);
         imageView = new ImageView(image);
         imageView.setPreserveRatio(true);
@@ -34,7 +38,9 @@ public class Photo extends HBox {
         this.getChildren().addAll(imageView, this.textArea);
     }
 
-
+    public String getLink() {
+        return link;
+    }
 
     public TextArea getTextArea() {
         return textArea;

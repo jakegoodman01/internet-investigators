@@ -1,9 +1,16 @@
+import javafx.scene.layout.HBox;
+
 public class TextPost extends Post {
     TextArea text;
 
     public TextPost (int year, int month, int date, TextArea text) {
         super(year, month, date);
         this.text = text;
+    }
+
+    @Override
+    public HBox timelineView() {
+        return null;
     }
 
     @Override

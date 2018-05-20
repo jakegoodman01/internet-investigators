@@ -4,8 +4,8 @@ import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
@@ -13,11 +13,14 @@ import javafx.scene.text.Text;
 
 
 public class PicturePost extends Post{
-    Photo photo;
-    Text numLikes;
+    private Photo photo;
+    private Text numLikes;
+    private final Photo timelineView;
 
     public PicturePost (int year, int month, int day, Photo photo) {
         super(year, month, day);
+
+        timelineView = new Photo(photo.getLink(), 100, photo.getTextArea().getCaption());
 
         StackPane stackPane = new StackPane();
         this.photo = photo;
@@ -55,6 +58,19 @@ public class PicturePost extends Post{
         stackPane.getChildren().addAll(photo, likeBox, likeImage);
 
         this.getChildren().add(stackPane);
+    }
+
+    public String getCaption() {
+        return photo.getTextArea().getCaption();
+    }
+
+    public Photo getPhoto() {
+        return photo;
+    }
+
+    @Override
+    public HBox timelineView() {
+        return timelineView;
     }
 
     @Override

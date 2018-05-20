@@ -9,9 +9,11 @@ import javafx.scene.text.*;
 public class TextArea extends ScrollPane {
 
     private VBox vBox;
+    private String caption;
 
     public TextArea(String caption, double photoHeight) {
         super();
+        this.caption = caption;
 
         Rectangle rect = new Rectangle(280, photoHeight * 2, Color.LIGHTGRAY);
         Text text = new Text();
@@ -45,5 +47,9 @@ public class TextArea extends ScrollPane {
         for (int i = 0; i < people.length; i++) {
             addComment(people[i], comments[i]);
         }
+    }
+
+    public String getCaption() {
+        return caption;
     }
 }

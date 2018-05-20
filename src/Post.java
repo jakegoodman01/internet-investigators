@@ -17,6 +17,8 @@ public abstract class Post extends HBox {
         peopleLiked = new ArrayList<Person>();
     }
 
+    public abstract HBox timelineView();
+
     public abstract void addComment(Person person, String comment);
 
     public abstract void addComments(Person[] people, String[] comments);
