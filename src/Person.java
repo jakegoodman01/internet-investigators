@@ -6,12 +6,14 @@ public class Person {
     private String bio;
     private Photo profilePic;
     private List<Photo> photos;
+    private Timeline timeline;
 
     public Person(String name, String bio, Photo profilePic) {
         this.name = name;
         this.bio = bio;
         this.profilePic = profilePic;
         this.photos = new ArrayList<>();
+        this.timeline = new Timeline(this);
     }
 
     public String getName() { return name; }
@@ -24,11 +26,9 @@ public class Person {
         return profilePic;
     }
 
-    public List<Photo> getPhotos() {
-        return photos;
-    }
+    public List<Photo> getPhotos() { return photos; }
 
-    public String getFirstName() { return name.substring(0, name.indexOf(' ')); }
+    public Timeline getTimeline() { return timeline; }
 
     public void addPhoto(Photo photo) { photos.add(photo); }
 }
