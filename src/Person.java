@@ -11,7 +11,7 @@ public class Person {
     public Person(String name, String bio, Photo profilePic) {
         this.name = name;
         this.bio = bio;
-        this.profilePic = profilePic;
+        this.profilePic = new Photo(profilePic.getLink(), 100, true);
         this.photos = new ArrayList<>();
         this.timeline = new Timeline(this);
     }

@@ -27,6 +27,16 @@ public class Photo extends HBox {
         this.getChildren().addAll(imageView);
     }
 
+    public Photo(String link, int width, boolean setWidth) {
+        super();
+        this.link = link;
+        image = new Image(link);
+        imageView = new ImageView(image);
+        imageView.setPreserveRatio(true);
+        imageView.setFitWidth(width);
+        this.getChildren().addAll(imageView);
+    }
+
     public Photo(String link, int height, String caption) {
         super();
         this.link = link;

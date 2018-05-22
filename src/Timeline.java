@@ -15,10 +15,11 @@ public class Timeline extends VBox {
 
     public Timeline(Person person) {
         super();
+        this.setMaxWidth(380);
         this.person = person;
-        Label title = new Label(String.format("%s's Timeline", person.getFirstName()));
+        Label title = new Label(String.format("%s's Timeline", person.getName()));
         title.setTextAlignment(TextAlignment.CENTER);
-        title.setFont(Font.font("Verdana", FontWeight.BOLD, 50));
+        title.setFont(Font.font("Verdana", FontWeight.BOLD, 30));
 
         BorderPane b = new BorderPane(title);
         this.getChildren().add(b);
