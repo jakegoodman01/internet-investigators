@@ -1,12 +1,24 @@
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.Tooltip;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 /**
  * @author Nathan Henry and Jake Goodman
@@ -58,7 +70,7 @@ public class Profile extends GridPane {
                     GridPane.setMargin(profilePic, new Insets(0, 0, 0, 25));
                     j+=2;
                 } else if (j == 3 && i == 1) {
-                    // Name=
+                    // Name
                     Text name = new Text(person.getName());
                     name.setWrappingWidth(45 * 2);
                     name.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 25));
@@ -70,9 +82,22 @@ public class Profile extends GridPane {
                     j+=2;
                 } else if (j == 3 && i == 2) {
                     // bio
-                    Text bio = new Text(person.getBio());
-                    bio.setWrappingWidth(45 * 7);
-                    bio.setFont(new Font(15));
+                    Text text = new Text(person.getBio().substring(0, 50) + "...");
+                    text.setFont(new Font(15));
+                    VBox bio = new VBox(text);
+                    bio.addEventHandler(MouseEvent.MOUSE_CLICKED, event ->  {
+                        Text t = new Text(person.getBio());
+                        t.setWrappingWidth(360);
+                        t.setFont(new Font(20));
+                        VBox root = new VBox(t);
+                        root.setPadding(new Insets(20, 20, 20, 20));
+                        Scene scene = new Scene(root);
+                        Stage stage = new Stage();
+                        stage.setMaxWidth(400);
+                        stage.setTitle("Bio");
+                        stage.setScene(scene);
+                        stage.show();
+                    });
                     this.add(bio, j, i, 7, 1);
                     GridPane.setMargin(bio, new Insets(0, 40, 0, 0));
                     j += 7;
@@ -95,7 +120,6 @@ public class Profile extends GridPane {
                     i += 10;
                 } else if (j == 3 && i == 3) {
                     // timeline
-                    //black(45 * 7, 43 * 7, j, i, 7, 8, new Insets(20, 40, 70, 0));
                     this.add(person.getTimeline(), j, i, 7, 8);
                     GridPane.setMargin(person.getTimeline(), new Insets(20, 40, 70, 0));
                     j += 7;
@@ -110,7 +134,7 @@ public class Profile extends GridPane {
 
     private void white(int width, int height, int colI, int rowI, int colSpan, int rowSpan)
     {
-        this.add(new Rectangle(width, height, Paint.valueOf("#ffffff")), colI, rowI, colSpan, rowSpan);
+        this.add(new Rectangle(width, height, Color.WHITESMOKE), colI, rowI, colSpan, rowSpan);
     }
 
     private void black(int width, int height, int colI, int rowI, int colSpan, int rowSpan)
