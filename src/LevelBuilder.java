@@ -83,6 +83,12 @@ public class LevelBuilder {
         } catch (IOException ioe) {
             System.out.printf("Error reading from file: %s%n", file);
         }
+
+        for (Person person : persons) {
+            for (Person person1: persons) {
+                if (!person.equals(person1)) person.addFriend(person1);
+            }
+        }
     }
 
     public static int numOfTabs(String line) {
