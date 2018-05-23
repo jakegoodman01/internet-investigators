@@ -1,13 +1,9 @@
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.control.Tooltip;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
@@ -22,35 +18,31 @@ import javafx.stage.Stage;
 
 /**
  * @author Nathan Henry and Jake Goodman
- * @since 2018-05-17
  * @version 2
- *
+ * <p>
  * This class contains the outline for the profile.
  * Currently, it creates black boxes where there will be other layouts filled by other classes.
- *
+ * <p>
  * Nathan:  Set the numbers and properties for the sections in the profile page
  * Jake:    Replaced the number guidelines with parts of a profile
- *
+ * <p>
  * Natham time spent: 2 hours
+ * @since 2018-05-17
  */
 public class Profile extends GridPane {
 
-    public Profile(Person person)
-    {
+    public Profile(Person person) {
         super();
         this.setPadding(new Insets(1, 1, 20, 1));
         this.setVgap(5);
         this.setHgap(5);
 
-        for (int i = 0; i<11; i++)
-        {
-            for (int j = 0; j<10; j++) {
-                if (j == 0 && i == 0)
-                {   // report button
+        for (int i = 0; i < 11; i++) {
+            for (int j = 0; j < 10; j++) {
+                if (j == 0 && i == 0) {   // report button
                     black(45 * 3 - 20, 43, j, i, 3, 1, new Insets(5, 0, 5, 25));
-                    j+=2;
-                }
-                else if (j == 4 && i == 0) {
+                    j += 2;
+                } else if (j == 4 && i == 0) {
                     // "To Pinboard"
                     black(45 * 2 + 15, 43, j, i, 2, 1);
                     j++;
@@ -68,7 +60,7 @@ public class Profile extends GridPane {
                     Photo profilePic = person.getProfilePic();
                     this.add(profilePic, j, i, 3, 2);
                     GridPane.setMargin(profilePic, new Insets(0, 0, 0, 25));
-                    j+=2;
+                    j += 2;
                 } else if (j == 3 && i == 1) {
                     // Name
                     Text name = new Text(person.getName());
@@ -79,13 +71,13 @@ public class Profile extends GridPane {
                     j++;
                 } else if (j == 0 && i == 2) {
                     // not a layout
-                    j+=2;
+                    j += 2;
                 } else if (j == 3 && i == 2) {
                     // bio
                     Text text = new Text(person.getBio().substring(0, 50) + "...");
                     text.setFont(new Font(15));
                     VBox bio = new VBox(text);
-                    bio.addEventHandler(MouseEvent.MOUSE_CLICKED, event ->  {
+                    bio.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
                         Text t = new Text(person.getBio());
                         t.setWrappingWidth(360);
                         t.setFont(new Font(20));
@@ -137,6 +129,20 @@ public class Profile extends GridPane {
                     friends.setMinHeight(43 * 5 / 2);
                     friends.setMinWidth(45 * 3 - 20);
 
+                    friends.setOnAction(e -> {
+                        ListView<Person> list = new ListView<>();
+                        ObservableList<Person> items = FXCollections.observableArrayList(
+                                person.getFriends()
+                        );
+                        list.setItems(items);
+                        Scene scene = new Scene(list);
+                        Stage stage = new Stage();
+                        stage.setTitle("Friends");
+                        stage.setScene(scene);
+                        stage.show();
+
+                    });
+
                     this.add(friends, j, i + 6, 3, 5);
                     GridPane.setMargin(friends, new Insets(10, 10, 10, 10));
                     j += 10;
@@ -146,8 +152,7 @@ public class Profile extends GridPane {
                     this.add(person.getTimeline(), j, i, 7, 8);
                     GridPane.setMargin(person.getTimeline(), new Insets(20, 40, 70, 0));
                     j += 7;
-                }
-                else {
+                } else {
                     // not a layout
                     white(45, 43, j, i, 1, 1);
                 }
@@ -155,18 +160,15 @@ public class Profile extends GridPane {
         }
     }
 
-    private void white(int width, int height, int colI, int rowI, int colSpan, int rowSpan)
-    {
+    private void white(int width, int height, int colI, int rowI, int colSpan, int rowSpan) {
         this.add(new Rectangle(width, height, Color.WHITESMOKE), colI, rowI, colSpan, rowSpan);
     }
 
-    private void black(int width, int height, int colI, int rowI, int colSpan, int rowSpan)
-    {
+    private void black(int width, int height, int colI, int rowI, int colSpan, int rowSpan) {
         this.add(new Rectangle(width, height, Paint.valueOf("#000000")), colI, rowI, colSpan, rowSpan);
     }
 
-    private void black(int width, int height, int colI, int rowI, int colSpan, int rowSpan, Insets insets)
-    {
+    private void black(int width, int height, int colI, int rowI, int colSpan, int rowSpan, Insets insets) {
         Rectangle r = new Rectangle(width, height, Paint.valueOf("#000000"));
         this.add(r, colI, rowI, colSpan, rowSpan);
         GridPane.setMargin(r, insets);
