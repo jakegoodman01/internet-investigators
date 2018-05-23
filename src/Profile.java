@@ -107,6 +107,29 @@ public class Profile extends GridPane {
                     photos.setMinHeight(43 * 5 / 2);
                     photos.setMinWidth(45 * 3 - 20);
 
+                    photos.setOnAction(e -> {
+                        GridPane root = new GridPane();
+                        root.setHgap(20);
+                        root.setVgap(20);
+
+                        int photoIndex = 0;
+                        for (int k = 0; k < 3; k++) {
+                            for (int m = 0; m < 3; m++) {
+                                if (photoIndex < person.getPhotos().size()) {
+                                    root.add(person.getPhotos().get(photoIndex), k, m);
+                                    photoIndex++;
+                                } else {
+                                    break;
+                                }
+                            }
+                        }
+                        Scene scene = new Scene(root);
+                        Stage stage = new Stage();
+                        stage.setTitle("Photos");
+                        stage.setScene(scene);
+                        stage.show();
+                    });
+
                     this.add(photos, j, i, 3, 5);
                     GridPane.setMargin(photos, new Insets(10, 10, 10, 10));
 
