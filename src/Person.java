@@ -7,6 +7,7 @@ public class Person {
     private Photo profilePic;
     private List<Photo> photos;
     private Timeline timeline;
+    private List<Person> friends;
 
     public Person(String name, String bio, Photo profilePic) {
         this.name = name;
@@ -14,6 +15,7 @@ public class Person {
         this.profilePic = new Photo(profilePic.getLink(), 100, true);
         this.photos = new ArrayList<>();
         this.timeline = new Timeline(this);
+        this.friends = new ArrayList<>();
     }
 
     public String getName() { return name; }
@@ -31,4 +33,8 @@ public class Person {
     public Timeline getTimeline() { return timeline; }
 
     public void addPhoto(Photo photo) { photos.add(photo); }
+
+    public void addFriend(Person p) { friends.add(p); }
+
+    public List<Person> getFriends() { return friends; }
 }
