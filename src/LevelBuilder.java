@@ -19,6 +19,7 @@ public class LevelBuilder {
             String line;
             String name = "";
             String bio = "";
+            String currLevel = file.substring(23, 29);
             boolean readBio = false;
             boolean picturePost = false;
             String photoLink = null;
@@ -43,7 +44,8 @@ public class LevelBuilder {
                         if (picturePost) {
                             if (photoLink == null) {
                                 photoLink = String.format(
-                                        "%s/timeline/%s", firstNameLower, line.substring(12)
+                                        "levels/%s/%s/timeline/%s", currLevel,
+                                        firstNameLower, line.substring(12)
                                 );
                             } else {
                                 post = new PicturePost(
@@ -65,11 +67,12 @@ public class LevelBuilder {
                             persons.add(new Person(
                                     name,
                                     bio,
-                                    new Photo(String.format("%s/profile.jpg",
-                                            firstNameLower
+                                    new Photo(String.format("levels/%s/%s/profile.jpg",
+                                            currLevel, firstNameLower
                                     ))
                             ));
-                            File f = new File(String.format("src/%s/photos", firstNameLower));
+                            File f = new File(String.format("src/levels/%s/%s/photos",
+                                    currLevel, firstNameLower));
                             File[] files = f.listFiles();
                             if (files == null) {
                                 throw new FileNotFoundException(
