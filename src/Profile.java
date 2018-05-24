@@ -16,19 +16,6 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-/**
- * @author Nathan Henry and Jake Goodman
- * @version 2
- * <p>
- * This class contains the outline for the profile.
- * Currently, it creates black boxes where there will be other layouts filled by other classes.
- * <p>
- * Nathan:  Set the numbers and properties for the sections in the profile page
- * Jake:    Replaced the number guidelines with parts of a profile
- * <p>
- * Natham time spent: 2 hours
- * @since 2018-05-17
- */
 public class Profile extends GridPane {
 
     public Profile(Person person) {
@@ -63,6 +50,7 @@ public class Profile extends GridPane {
                         Stage stage = new Stage();
                         stage.setTitle(String.format("%s's Profile Picture", person.getName()));
                         stage.setScene(scene);
+                        stage.setResizable(false);
                         stage.show();
                         event.consume();
                     });
@@ -96,6 +84,7 @@ public class Profile extends GridPane {
                         stage.setMaxWidth(400);
                         stage.setTitle("Bio");
                         stage.setScene(scene);
+                        stage.setResizable(false);
                         stage.show();
                     });
                     this.add(bio, j, i, 7, 1);
@@ -127,6 +116,7 @@ public class Profile extends GridPane {
                         Stage stage = new Stage();
                         stage.setTitle("Photos");
                         stage.setScene(scene);
+                        stage.setResizable(false);
                         stage.show();
                     });
 
@@ -147,6 +137,7 @@ public class Profile extends GridPane {
                         Stage stage = new Stage();
                         stage.setTitle("Friends");
                         stage.setScene(scene);
+                        stage.setResizable(false);
                         stage.show();
 
                     });

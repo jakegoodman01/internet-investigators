@@ -13,11 +13,21 @@ import javafx.scene.text.Text;
 import java.util.Date;
 
 
-public class PicturePost extends Post{
+public class PicturePost extends Post {
     private Photo photo;
     private Text numLikes;
     private final Photo timelineView;
 
+    /**
+     * Calls super constructor with given Date
+     * timelineView is initialized to the same photo link as the given Photo, but with height of 100
+     * photo is initialized to given Photo
+     * Sets up view for a picture post which contains: box to display the date, box to display the number of likes,
+     *                                                 and a list of the people who liked the post is displayed upon
+     *                                                 hovering the number of likes
+     * @param postingDate the Date of this post
+     * @param photo the photo that was posted
+     */
     public PicturePost (Date postingDate, Photo photo) {
         super(postingDate);
 
@@ -26,23 +36,28 @@ public class PicturePost extends Post{
         StackPane stackPane = new StackPane();
         this.photo = photo;
 
+        // white box which appears to contain the date
         Rectangle dateBox = new Rectangle();
         dateBox.setFill(Color.WHITESMOKE);
         dateBox.setWidth(150);
         dateBox.setHeight(40);
 
+        // text displaying the date
         Text date = new Text(super.formatDate());
         date.setFont(new Font(25));
         date.setWrappingWidth(150);
 
+        // white box which appears to contain the number of likes and the like image
         Rectangle likeBox = new Rectangle();
         likeBox.setFill(Color.WHITESMOKE);
         likeBox.setWidth(100);
         likeBox.setHeight(40);
 
+        // the classic Facebook thumbs up image
         Photo likeImage = new Photo("facebook_like.png", 40);
         likeImage.setAlignment(Pos.BOTTOM_LEFT);
 
+        // numlikes hoverProperty is set to display a list of all people who liked the posts
         numLikes = new Text("0");
         numLikes.setFont(new Font(40));
         numLikes.hoverProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean show) -> {
@@ -62,6 +77,7 @@ public class PicturePost extends Post{
         likeImage.setSpacing(15);
         likeImage.getChildren().add(numLikes);
 
+        // places all nodes in the correct alignment
         StackPane.setAlignment(likeBox, Pos.BOTTOM_LEFT);
         StackPane.setAlignment(dateBox, Pos.BOTTOM_RIGHT);
         StackPane.setAlignment(date, Pos.BOTTOM_RIGHT);
@@ -70,29 +86,56 @@ public class PicturePost extends Post{
         this.getChildren().add(stackPane);
     }
 
+    /**
+     * Getter for the caption of this post
+     * @return caption of this post
+     */
     public String getCaption() {
         return photo.getTextArea().getCaption();
     }
 
+    /**
+     * Getter for photo
+     * @return
+     */
     public Photo getPhoto() {
         return photo;
     }
 
+    /**
+     * Getter for timelineView
+     * @return
+     */
     @Override
     public HBox timelineView() {
         return timelineView;
     }
 
+    /**
+     * Adds a comment to this post
+     * @param person person who left the comment
+     * @param comment comment
+     */
     @Override
     public void addComment(Person person, String comment) {
         photo.addComment(person, comment);
     }
 
+    /**
+     * Adds multiple comments to this post
+     * @param people list of people who left the comments
+     * @param comments comments
+     */
     @Override
     public void addComments(Person[] people, String[] comments) {
         photo.addComments(people, comments);
     }
 
+    /**
+     * Adds one like to this post
+     * Increments numLikes by one
+     * @param person person who left the like
+     */
     @Override
     public void addLike(Person person) {
         super.addLike(person);
