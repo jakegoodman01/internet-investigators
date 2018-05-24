@@ -2,7 +2,6 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -64,8 +63,8 @@ public class PicturePost extends Post{
         likeImage.getChildren().add(numLikes);
 
         StackPane.setAlignment(likeBox, Pos.BOTTOM_LEFT);
-        StackPane.setAlignment(dateBox, Pos.TOP_LEFT);
-        StackPane.setAlignment(date, Pos.TOP_LEFT);
+        StackPane.setAlignment(dateBox, Pos.BOTTOM_RIGHT);
+        StackPane.setAlignment(date, Pos.BOTTOM_RIGHT);
         stackPane.getChildren().addAll(photo, likeBox, likeImage, dateBox, date);
 
         this.getChildren().add(stackPane);

@@ -33,6 +33,50 @@ public class TextArea extends ScrollPane {
         this.setContent(content);
     }
 
+    public TextArea(String caption) {
+        super();
+        this.caption = caption;
+
+        Rectangle rect = new Rectangle(600, 500, Color.LIGHTGRAY);
+        Text text = new Text();
+        text.setWrappingWidth(600);
+        text.setTextAlignment(TextAlignment.JUSTIFY);
+        text.setText(caption);
+        text.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
+
+        vBox = new VBox();
+        vBox.getChildren().add(text);
+        vBox.setAlignment(Pos.TOP_LEFT);
+
+        StackPane content = new StackPane();
+        content.getChildren().addAll(rect, vBox);
+
+        this.setPrefSize(600, 500);
+        this.setContent(content);
+    }
+
+    public TextArea(String caption, boolean timelineView) {
+        super();
+        this.caption = caption;
+
+        Rectangle rect = new Rectangle(400, 100, Color.LIGHTGRAY);
+        Text text = new Text();
+        text.setWrappingWidth(400);
+        text.setTextAlignment(TextAlignment.JUSTIFY);
+        text.setText(caption);
+        text.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
+
+        vBox = new VBox();
+        vBox.getChildren().add(text);
+        vBox.setAlignment(Pos.TOP_LEFT);
+
+        StackPane content = new StackPane();
+        content.getChildren().addAll(rect, vBox);
+
+        this.setPrefSize(400, 400);
+        this.setContent(content);
+    }
+
     public void addComment(Person person, String comment) {
         Text text = new Text();
         text.setWrappingWidth(280);

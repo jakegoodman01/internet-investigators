@@ -52,6 +52,11 @@ public class LevelBuilder {
                                 );
                                 photoLink = null;
                             }
+                        } else {
+                            post = new TextPost(
+                                    new Date(),
+                                    new TextArea(line.substring(12))
+                            );
                         }
                         break;
                     default:
