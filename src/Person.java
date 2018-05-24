@@ -24,9 +24,9 @@ public class Person {
         return bio;
     }
 
-    public Photo getProfilePic() {
-        return profilePic;
-    }
+    public Photo getRawProfilePic() { return profilePic; }
+
+    public Photo getNewProfilePic() { return new Photo(profilePic.getLink()); }
 
     public List<Photo> getPhotos() { return photos; }
 

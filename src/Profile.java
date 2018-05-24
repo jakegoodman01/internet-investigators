@@ -57,7 +57,15 @@ public class Profile extends GridPane {
                     black(40, 40, j, i, 1, 1, new Insets(5, 5, 5, 0));
                 } else if (j == 0 && i == 1) {
                     // Profile Picture
-                    Photo profilePic = person.getProfilePic();
+                    Photo profilePic = person.getRawProfilePic();
+                    profilePic.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+                        Scene scene = new Scene(person.getNewProfilePic());
+                        Stage stage = new Stage();
+                        stage.setTitle(String.format("%s's Profile Picture", person.getName()));
+                        stage.setScene(scene);
+                        stage.show();
+                        event.consume();
+                    });
                     this.add(profilePic, j, i, 3, 2);
                     GridPane.setMargin(profilePic, new Insets(0, 0, 0, 25));
                     j += 2;
