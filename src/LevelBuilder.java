@@ -27,10 +27,12 @@ public class LevelBuilder {
             while ((line = br.readLine()) != null) {
                 switch (LevelBuilder.numOfTabs(line)) {
                     case 0:
+                        if (line.equals("")) continue;
                         name = line.substring(0, line.indexOf(','));
                         break;
                     case 1:
                         readBio = line.equals("    Bio:");
+                        bio = "";
                         break;
                     case 2:
                         if (readBio) {
@@ -80,7 +82,9 @@ public class LevelBuilder {
                                 );
                             } else {
                                 for (File photo: files) {
-                                    persons.get(persons.size() - 1).addPhoto(new Photo(photo.toString().substring(4)));
+                                    persons.get(persons.size() - 1).addPhoto(new Photo(
+                                            photo.toString().substring(4),
+                                            200));
                                 }
                             }
                         } else {

@@ -70,7 +70,13 @@ public class Profile extends GridPane {
                     j += 2;
                 } else if (j == 3 && i == 2) {
                     // bio
-                    Text text = new Text(person.getBio().substring(0, 50) + "...");
+                    Text text;
+                    if (person.getBio().length() < 47) {
+                        text = new Text(person.getBio());
+                    } else {
+                        text = new Text(person.getBio().substring(0, 50) + "...");
+                    }
+
                     text.setFont(new Font(15));
                     VBox bio = new VBox(text);
                     bio.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
@@ -128,10 +134,11 @@ public class Profile extends GridPane {
                     friends.setMinWidth(45 * 3 - 20);
 
                     friends.setOnAction(e -> {
-                        ListView<Person> list = new ListView<>();
-                        ObservableList<Person> items = FXCollections.observableArrayList(
-                                person.getFriends()
-                        );
+                        ListView<String> list = new ListView<>();
+                        ObservableList<String> items = FXCollections.observableArrayList();
+                        for (Person p : person.getFriends()) {
+                            items.add(p.getName());
+                        }
                         list.setItems(items);
                         Scene scene = new Scene(list);
                         Stage stage = new Stage();

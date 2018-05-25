@@ -107,6 +107,11 @@ public class TextArea extends ScrollPane {
         this.setContent(content);
     }
 
+    /**
+     * Adds a comment to this TextArea
+     * @param person person who left the comment
+     * @param comment the content of the comment
+     */
     public void addComment(Person person, String comment) {
         Text text = new Text();
         text.setWrappingWidth(280);
@@ -117,12 +122,21 @@ public class TextArea extends ScrollPane {
         vBox.getChildren().addAll(new Text(), text);
     }
 
+    /**
+     * Adds multiple comments to this TextArea
+     * @param people list of people who left comments
+     * @param comments list of comments that were left
+     */
     public void addComments(Person[] people, String[] comments) {
         for (int i = 0; i < people.length; i++) {
             addComment(people[i], comments[i]);
         }
     }
 
+    /**
+     * Getter for caption
+     * @return caption
+     */
     public String getCaption() {
         return caption;
     }

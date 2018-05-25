@@ -13,6 +13,10 @@ public class Timeline extends VBox {
 
     private Person person;
 
+    /**
+     * Timeline takes a Person and formats their posts nicely into a box
+     * @param person Person for the timeline to be built upon
+     */
     public Timeline(Person person) {
         super();
         this.setMaxWidth(380);
@@ -25,8 +29,13 @@ public class Timeline extends VBox {
         this.getChildren().add(b);
     }
 
+    /**
+     * Adds a post to the timeline directly
+     * @param post Post to be added
+     */
     public void addPost(Post post) {
         HBox box = new HBox(post.timelineView());
+        // When clicked on, the post enlarges into how it is normally displayed by the Post class
         box.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             Post p;
             if (post instanceof PicturePost) {

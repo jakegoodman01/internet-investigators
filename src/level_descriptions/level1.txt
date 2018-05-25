@@ -24,3 +24,24 @@ Abby, Normal:
             chess_club.jpg
             Signed up for chess club. Message me if you joined!
 
+
+Billy, Normal:
+    Bio:
+        Chess is the gymnasium of the mind.
+
+    Timeline:
+        PicturePost:
+            billyChessPic.jpg
+            Thanks to everyone that made this possible! I am looking forward to next year!
+
+        PicturePost:
+            billyClassroom.jpg
+            First day of Middle School Junior High!
+
+
+Caleb, Predator:
+    Bio:
+        I love soccer, hockey, chess and math!
+
+    Timeline:
+
