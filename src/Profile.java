@@ -18,6 +18,10 @@ import javafx.stage.Stage;
 
 public class Profile extends GridPane {
 
+    /**
+     * Places all elements of a Person onto a nice looking profile page!
+     * @param person Person for a profile page
+     */
     public Profile(Person person) {
         super();
         this.setPadding(new Insets(1, 1, 20, 1));
@@ -26,7 +30,8 @@ public class Profile extends GridPane {
 
         for (int i = 0; i < 11; i++) {
             for (int j = 0; j < 10; j++) {
-                if (j == 0 && i == 0) {   // report button
+                if (j == 0 && i == 0) {
+                    // report button
                     black(45 * 3 - 20, 43, j, i, 3, 1, new Insets(5, 0, 5, 25));
                     j += 2;
                 } else if (j == 4 && i == 0) {
