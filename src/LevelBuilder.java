@@ -40,6 +40,7 @@ public class LevelBuilder {
             boolean picturePost = false; // indicates weather a PicturePost is currently being created
             String photoLink = null; // link to a photo
             Post post = null; // the most recent created Post
+            Date date = null;
             while ((line = br.readLine()) != null) {
                 switch (LevelBuilder.numOfTabs(line)) {
                     case 0:
@@ -54,7 +55,12 @@ public class LevelBuilder {
                         if (readBio) {
                             bio += line.substring(8);
                         } else {
-                            picturePost = line.equals("        PicturePost:");
+                            picturePost = line.substring(0, 20).equals("        PicturePost:");
+                            String dateLine = line.substring(line.indexOf(':') + 1);
+                            int month = Integer.valueOf(dateLine.substring(0, 2));
+                            int day = Integer.valueOf(dateLine.substring(3, 5));
+                            int year = Integer.valueOf(dateLine.substring(6));
+                            date = new Date(month, day, year);
                         }
                         break;
                     case 3:
@@ -71,7 +77,7 @@ public class LevelBuilder {
                             // if the link has been read, create a new PicturePost with the current line as the caption
                             } else {
                                 post = new PicturePost(
-                                        new Date(),
+                                        date,
                                         new Photo(photoLink, 300, line.substring(12))
                                 );
                                 photoLink = null;
@@ -80,7 +86,7 @@ public class LevelBuilder {
                         } else {
                             // create a new TextPost with the current line as the caption
                             post = new TextPost(
-                                    new Date(),
+                                    date,
                                     new TextArea(line.substring(12))
                             );
                         }
