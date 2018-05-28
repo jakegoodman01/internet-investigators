@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 public class Chatbox extends VBox {
 
@@ -49,9 +50,10 @@ public class Chatbox extends VBox {
                         break;
                     case 1:
                         String question = line.substring(0, line.indexOf('|'));
-                        String answer = line.substring(line.indexOf('|'));
+                        String answer = line.substring(line.indexOf('|') + 1);
                         questions.get(name).add(question);
                         responder.put(question, answer);
+                        break;
                     default:
                 }
             }
@@ -79,8 +81,9 @@ public class Chatbox extends VBox {
 
         Button submit = new Button("Enter message");
         submit.setOnAction(event -> {
-            if (questionChoice.getValue() != null) {
+            if (questionChoice.getValue() != null && personChoice.getValue() != null) {
                 addMessage("You", questionChoice.getValue().toString());
+                addMessage(personChoice.getValue().toString(), responder.get(questionChoice.getValue().toString()));
             }
         });
 
@@ -122,7 +125,10 @@ public class Chatbox extends VBox {
 
         Text personName = new Text(name + ":");
         personName.setFont(new Font(20));
-        personName.setFill(Color.BLUE);
+        if (personName.getText().equals("You:"))
+            personName.setFill(Color.BLUE);
+        else
+            personName.setFill(Color.RED);
 
         Text chatMessage = new Text(message);
         chatMessage.setFont(new Font(20));
