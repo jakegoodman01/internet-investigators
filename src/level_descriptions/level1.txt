@@ -24,7 +24,6 @@ Abby, Normal:
             chess_club.jpg
             Signed up for chess club. Message me if you joined!
 
-
 Billy, Normal:
     Bio:
         Chess is the gymnasium of the mind.
@@ -38,7 +37,6 @@ Billy, Normal:
             billyClassroom.jpg
             First day of Middle School Junior High!
 
-
 Caleb, Normal:
     Bio:
         I love soccer, hockey, chess and math!
@@ -51,4 +49,3 @@ Caleb, Normal:
         PicturePost:09/10/2017
             school.jpg
             I'm psyched for my first day of school today
-

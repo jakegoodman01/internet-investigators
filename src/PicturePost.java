@@ -5,10 +5,13 @@ import javafx.geometry.Pos;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 
 import java.util.Date;
 
@@ -16,7 +19,6 @@ import java.util.Date;
 public class PicturePost extends Post {
     private Photo photo;
     private Text numLikes;
-    private final Photo timelineView;
 
     /**
      * Calls super constructor with given Date
@@ -31,7 +33,6 @@ public class PicturePost extends Post {
     public PicturePost (Date postingDate, Photo photo) {
         super(postingDate);
 
-        timelineView = new Photo(photo.getLink(), 100, photo.getTextArea().getCaption());
 
         StackPane stackPane = new StackPane();
         this.photo = photo;
@@ -108,7 +109,30 @@ public class PicturePost extends Post {
      */
     @Override
     public HBox timelineView() {
-        return timelineView;
+        HBox view = new HBox();
+
+        Photo newPhoto = new Photo(photo.getLink(), 100);
+        // Rectangle object is made, and sized with the given photoHeight
+        Rectangle rect = new Rectangle(500, 100, Color.LIGHTGRAY);
+
+        // Text object is made. Its content is the given caption
+        Text text = new Text();
+        text.setWrappingWidth(400);
+        text.setTextAlignment(TextAlignment.JUSTIFY);
+        text.setText(photo.getTextArea().getCaption());
+        text.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
+
+        // VBox contains the text and is aligned at the top left
+        VBox vBox = new VBox();
+        vBox.getChildren().add(text);
+        vBox.setAlignment(Pos.TOP_LEFT);
+
+        // StackPane contains both the rectangle and the VBox
+        StackPane content = new StackPane();
+        content.getChildren().addAll(rect, vBox);
+        view.setMaxWidth(400);
+        view.getChildren().addAll(newPhoto, content);
+        return view;
     }
 
     /**

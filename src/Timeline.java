@@ -1,9 +1,12 @@
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
@@ -12,6 +15,8 @@ import javafx.stage.Stage;
 public class Timeline extends VBox {
 
     private Person person;
+    private VBox allPosts;
+    private ScrollPane container;
 
     /**
      * Timeline takes a Person and formats their posts nicely into a box
@@ -19,14 +24,27 @@ public class Timeline extends VBox {
      */
     public Timeline(Person person) {
         super();
-        this.setMaxWidth(380);
+
+        Rectangle line = new Rectangle(800, 2, Color.BLACK);
+
+        allPosts = new VBox();
+
+        allPosts.setStyle("-fx-background-color: #D3D3D3;");
+        allPosts.getChildren().add(line);
+
+        container = new ScrollPane();
+        container.setMaxWidth(380);
+        container.setMaxHeight(400);
+        container.setContent(allPosts);
+
         this.person = person;
+
         Label title = new Label(String.format("%s's Timeline", person.getName()));
         title.setTextAlignment(TextAlignment.CENTER);
         title.setFont(Font.font("Verdana", FontWeight.BOLD, 30));
 
         BorderPane b = new BorderPane(title);
-        this.getChildren().add(b);
+        this.getChildren().addAll(b, container);
     }
 
     /**
@@ -50,6 +68,8 @@ public class Timeline extends VBox {
             stage.show();
             event.consume();
         });
-        this.getChildren().add(box);
+
+        Rectangle line = new Rectangle(800, 2, Color.BLACK);
+        allPosts.getChildren().addAll(box, line);
     }
 }

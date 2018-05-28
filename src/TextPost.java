@@ -5,23 +5,23 @@ import javafx.geometry.Pos;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 
 import java.util.Date;
 
 public class TextPost extends Post {
     TextArea text;
-    private final HBox timelineView;
     private Text numLikes;
 
     public TextPost (Date postingDate, TextArea text) {
         super(postingDate);
         this.text = text;
-
-        timelineView = new HBox(new TextArea(text.getCaption(), true));
 
         StackPane stackPane = new StackPane();
 
@@ -75,7 +75,29 @@ public class TextPost extends Post {
 
     @Override
     public HBox timelineView() {
-        return timelineView;
+        HBox view = new HBox();
+
+        // Rectangle object is made, and sized with the given photoHeight
+        Rectangle rect = new Rectangle(500, 100, Color.LIGHTGRAY);
+
+        // Text object is made. Its content is the given caption
+        Text text = new Text();
+        text.setWrappingWidth(400);
+        text.setTextAlignment(TextAlignment.JUSTIFY);
+        text.setText(this.text.getCaption());
+        text.setFont(Font.font("Verdana", FontWeight.BOLD, 15));
+
+        // VBox contains the text and is aligned at the top left
+        VBox vBox = new VBox();
+        vBox.getChildren().add(text);
+        vBox.setAlignment(Pos.TOP_LEFT);
+
+        // StackPane contains both the rectangle and the VBox
+        StackPane content = new StackPane();
+        content.getChildren().addAll(rect, vBox);
+        view.setMinWidth(400);
+        view.getChildren().addAll(content);
+        return view;
     }
 
     @Override
