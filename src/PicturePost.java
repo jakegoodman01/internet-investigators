@@ -13,6 +13,7 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 
+import java.util.Calendar;
 import java.util.Date;
 
 
@@ -41,7 +42,7 @@ public class PicturePost extends Post {
         Rectangle dateBox = new Rectangle();
         dateBox.setFill(Color.WHITESMOKE);
         dateBox.setWidth(150);
-        dateBox.setHeight(40);
+        dateBox.setHeight(60);
 
         // text displaying the date
         Text date = new Text(super.formatDate());

@@ -1,5 +1,6 @@
 import javafx.scene.layout.HBox;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.ArrayList;
 
@@ -28,11 +29,8 @@ public abstract class Post extends HBox {
      * @return formatted String to represent the date
      */
     public String formatDate() {
-        String dateAsString = postingDate.toString();
-        int firstSpace = dateAsString.indexOf(' ');
-        int secondSpace = dateAsString.indexOf(' ', firstSpace + 1);
-        int thirdSpace = dateAsString.indexOf(' ', secondSpace + 1);
-        return dateAsString.substring(0, thirdSpace);
+        String sDate = postingDate.toString();
+        return sDate.substring(0, 10) + ", " + sDate.substring(sDate.length() - 4);
     }
 
     /**

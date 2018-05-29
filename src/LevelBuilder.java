@@ -3,9 +3,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 
 public class LevelBuilder {
@@ -60,7 +60,16 @@ public class LevelBuilder {
                             int month = Integer.valueOf(dateLine.substring(0, 2));
                             int day = Integer.valueOf(dateLine.substring(3, 5));
                             int year = Integer.valueOf(dateLine.substring(6));
-                            date = new Date(month, day, year);
+                            Calendar calendar = new GregorianCalendar(year, month - 1, day);
+                            Date d = calendar.getTime();
+                            SimpleDateFormat format = new SimpleDateFormat("yyy-MM-dd");
+                            String sDate = format.format(d);
+
+                            try {
+                                date = format.parse(sDate);
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
                         }
                         break;
                     case 3:

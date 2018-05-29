@@ -13,6 +13,7 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 
+import java.util.Calendar;
 import java.util.Date;
 
 public class TextPost extends Post {
@@ -37,7 +38,7 @@ public class TextPost extends Post {
         Rectangle likeBox = new Rectangle();
         likeBox.setFill(Color.WHITESMOKE);
         likeBox.setWidth(100);
-        likeBox.setHeight(40);
+        likeBox.setHeight(60);
 
         Photo likeImage = new Photo("facebook_like.png", 40);
         likeImage.setAlignment(Pos.BOTTOM_LEFT);
