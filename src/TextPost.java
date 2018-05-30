@@ -29,7 +29,7 @@ public class TextPost extends Post {
         Rectangle dateBox = new Rectangle();
         dateBox.setFill(Color.WHITESMOKE);
         dateBox.setWidth(150);
-        dateBox.setHeight(40);
+        dateBox.setHeight(60);
 
         Text date = new Text(super.formatDate());
         date.setFont(new Font(25));
@@ -38,7 +38,7 @@ public class TextPost extends Post {
         Rectangle likeBox = new Rectangle();
         likeBox.setFill(Color.WHITESMOKE);
         likeBox.setWidth(100);
-        likeBox.setHeight(60);
+        likeBox.setHeight(40);
 
         Photo likeImage = new Photo("facebook_like.png", 40);
         likeImage.setAlignment(Pos.BOTTOM_LEFT);
