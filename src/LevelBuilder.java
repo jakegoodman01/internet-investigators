@@ -44,7 +44,6 @@ public class LevelBuilder {
             while ((line = br.readLine()) != null) {
                 switch (LevelBuilder.numOfTabs(line)) {
                     case 0:
-                        if (line.equals("")) continue;
                         name = line.substring(0, line.indexOf(','));
                         break;
                     case 1:
@@ -53,7 +52,14 @@ public class LevelBuilder {
                         break;
                     case 2:
                         if (readBio) {
-                            bio += line.substring(8);
+                            if (line.substring(8, 13).equals("hint:")) {
+                                persons.get(persons.size() - 1).getHints().put(
+                                        "bio", line.substring(13)
+                                        );
+                            } else {
+                                bio += line.substring(8);
+                            }
+
                         } else {
                             picturePost = line.substring(0, 20).equals("        PicturePost:");
                             String dateLine = line.substring(line.indexOf(':') + 1);
