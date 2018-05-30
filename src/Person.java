@@ -1,5 +1,7 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Person {
     private String name;
@@ -8,6 +10,7 @@ public class Person {
     private List<Photo> photos;
     private Timeline timeline;
     private List<Person> friends;
+    private Map<String, String> hints;
 
     /**
      * Given variables are assigned to their corresponding fields
@@ -25,6 +28,8 @@ public class Person {
         this.photos = new ArrayList<>();
         this.timeline = new Timeline(this);
         this.friends = new ArrayList<>();
+
+        this.hints = new HashMap<>();
     }
 
     /**
@@ -81,4 +86,6 @@ public class Person {
      * @return friends
      */
     public List<Person> getFriends() { return friends; }
+
+    public Map<String, String> getHints() { return hints; }
 }
