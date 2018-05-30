@@ -36,7 +36,9 @@ public class LevelBuilder {
             String name = ""; // name of the character that is currently being created
             String bio = ""; // bio of the character that is currently being created
             String currLevel = file.substring(23, 29); // the level that is being created, e.g. level2 or level3
+            String hint = null; // represents a hint that must be entered later on
             boolean readBio = false; // indicates weather the bio is currently being read
+            boolean readTimeline = false; // indicates weather the timeline is currently being read
             boolean picturePost = false; // indicates weather a PicturePost is currently being created
             String photoLink = null; // link to a photo
             Post post = null; // the most recent created Post
@@ -47,22 +49,31 @@ public class LevelBuilder {
                         name = line.substring(0, line.indexOf(','));
                         break;
                     case 1:
-                        readBio = line.equals("    Bio:");
-                        bio = "";
+                        readBio = line.substring(4, 8).equals("Bio:");
+                        if (readBio) {
+                            hint = line.substring(8);
+                            bio = "";
+                        } else {
+                            readTimeline = line.substring(4).equals("Timeline:");
+                            if (!readTimeline) {
+                                persons.get(persons.size() - 1).getHints().put(
+                                        line.substring(4, line.indexOf(':')),
+                                        line.substring(line.indexOf(':') + 1)
+                                );
+                            }
+                        }
                         break;
                     case 2:
                         if (readBio) {
-                            if (line.substring(8, 13).equals("hint:")) {
-                                persons.get(persons.size() - 1).getHints().put(
-                                        "bio", line.substring(13)
-                                        );
-                            } else {
-                                bio += line.substring(8);
-                            }
-
+                            bio += line.substring(8);
                         } else {
-                            picturePost = line.substring(0, 20).equals("        PicturePost:");
-                            String dateLine = line.substring(line.indexOf(':') + 1);
+                            picturePost = line.substring(8).equals("PicturePost:");
+                            hint = line.substring(line.indexOf(':') + 1);
+                        }
+                        break;
+                    case 3:
+                        if (date == null) {
+                            String dateLine = line.substring(12);
                             int month = Integer.valueOf(dateLine.substring(0, 2));
                             int day = Integer.valueOf(dateLine.substring(3, 5));
                             int year = Integer.valueOf(dateLine.substring(6));
@@ -76,39 +87,40 @@ public class LevelBuilder {
                             } catch (ParseException e) {
                                 e.printStackTrace();
                             }
-                        }
-                        break;
-                    case 3:
-                        // firstNameLower is the character name in all lower case letters
-                        String firstNameLower = name.toLowerCase();
-                        // if a PicturePost is being created
-                        if (picturePost) {
-                            // if the link has not been read, assign the given link to photoLink
-                            if (photoLink == null) {
-                                photoLink = String.format(
-                                        "levels/%s/%s/timeline/%s", currLevel,
-                                        firstNameLower, line.substring(12)
-                                );
-                            // if the link has been read, create a new PicturePost with the current line as the caption
-                            } else {
-                                post = new PicturePost(
-                                        date,
-                                        new Photo(photoLink, 300, line.substring(12))
-                                );
-                                photoLink = null;
-                            }
-                        // if we are not reading a PicturePost, we must be reading a TextPost
                         } else {
-                            // create a new TextPost with the current line as the caption
-                            post = new TextPost(
-                                    date,
-                                    new TextArea(line.substring(12))
-                            );
+                            // firstNameLower is the character name in all lower case letters
+                            String firstNameLower = name.toLowerCase();
+                            // if a PicturePost is being created
+                            if (picturePost) {
+                                // if the link has not been read, assign the given link to photoLink
+                                if (photoLink == null) {
+                                    photoLink = String.format(
+                                            "levels/%s/%s/timeline/%s", currLevel,
+                                            firstNameLower, line.substring(12)
+                                    );
+                                    // if the link has been read, create a new PicturePost with the current line as the caption
+                                } else {
+                                    post = new PicturePost(
+                                            date,
+                                            new Photo(photoLink, 300, line.substring(12))
+                                    );
+                                    date = null;
+                                    photoLink = null;
+                                }
+                                // if we are not reading a PicturePost, we must be reading a TextPost
+                            } else {
+                                // create a new TextPost with the current line as the caption
+                                post = new TextPost(
+                                        date,
+                                        new TextArea(line.substring(12))
+                                );
+                                date = null;
+                            }
                         }
                         break;
                     default:
                         if (readBio) {
-                            firstNameLower = name.toLowerCase();
+                            String firstNameLower = name.toLowerCase();
                             // creates a person with their name, bio and profile picture
                             persons.add(new Person(
                                     name,
@@ -117,6 +129,9 @@ public class LevelBuilder {
                                             currLevel, firstNameLower
                                     ))
                             ));
+                            persons.get(persons.size() - 1).getHints().put(
+                                    "bio", hint
+                            );
                             // loops through the images in the character's photos package and adds each one to the
                             // character's photos
                             File f = new File(String.format("src/levels/%s/%s/photos",
@@ -133,8 +148,9 @@ public class LevelBuilder {
                                             200));
                                 }
                             }
-                        } else {
+                        } else if (readTimeline) {
                             // adds the most recent post to the character's timeline
+                            post.setHint(hint);
                             persons.get(persons.size() - 1).getTimeline().addPost(post);
                         }
                 }

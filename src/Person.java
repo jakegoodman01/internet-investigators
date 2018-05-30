@@ -87,5 +87,9 @@ public class Person {
      */
     public List<Person> getFriends() { return friends; }
 
+    /**
+     * Getter for hints
+     * @return hints
+     */
     public Map<String, String> getHints() { return hints; }
 }
