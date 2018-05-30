@@ -9,6 +9,7 @@ public abstract class Post extends HBox {
     private Date postingDate;
     private int numLikes;
     private ArrayList<Person> peopleLiked;
+    private String hint;
 
     /**
      * Assigns postingDate to given Date
@@ -99,5 +100,13 @@ public abstract class Post extends HBox {
             people.add(p.getName());
         }
         return people;
+    }
+
+    public String getHint() {
+        return hint;
+    }
+
+    public void setHint(String hint) {
+        this.hint = hint;
     }
 }
