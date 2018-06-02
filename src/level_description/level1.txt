@@ -13,12 +13,24 @@ Abby, Normal:
     profilePic:She looks happy.
 
     Timeline:
-        PicturePost:Cool sketch!
-            04/16/2017
-            sketch.jpg
-            First Post!
-                Likes:Billy
-                Comments:Billy:You're so talented
+        PicturePost:Are you sure that's the real chess sign-up sheet?
+            09/14/2017
+            chess_club.jpg
+            Signed up for chess club. Message me if you joined!
+                Likes:Billy,Caleb
+                Comments:Billy:Haha! Of course I joined!,Caleb:Me
+
+        PicturePost:Looks like a nice school.
+            09/11/2017
+            school.jpg
+            First day! I'm soooo excited!!!!!
+                Likes:Caleb
+
+        TextPost:So about a week from this post, school started.
+            09/04/2017
+            Yay! School starts in less than a week!
+                Likes:Billy,Caleb
+                Comments:Billy:Signing up for chess this year Abby?,Caleb:Me too!
 
         PicturePost:I remember when I was in Grade 6.
             06/23/2017
@@ -27,24 +39,12 @@ Abby, Normal:
                 Likes:Billy
                 Comments:Billy:Ready for next year?
 
-        TextPost:So about a week from this post, school started.
-            09/04/2017
-            Yay! School starts in less than a week!
-                Likes:Billy,Caleb
-                Comments:Billy:Signing up for chess this year Abby?,Caleb:Me too!
-
-        PicturePost:Looks like a nice school.
-            09/11/2017
-            school.jpg
-            First day! I'm soooo excited!!!!!
-                Likes:Caleb
-
-        PicturePost:Are you sure that's the real chess sign-up sheet?
-            09/14/2017
-            chess_club.jpg
-            Signed up for chess club. Message me if you joined!
-                Likes:Billy,Caleb
-                Comments:Billy:Haha! Of course I joined!,Caleb:Me
+        PicturePost:Cool sketch!
+            04/16/2017
+            sketch.jpg
+            First Post!
+                Likes:Billy
+                Comments:Billy:You're so talented
 
 Billy, Normal:
     Bio:Introspective.
@@ -57,18 +57,18 @@ Billy, Normal:
     profilePic:A happy youngster.
 
     Timeline:
-        PicturePost:Future chess master here.
-            05/20/2017
-            billyChessPic.jpg
-            I am looking forward to next year's May Junior Chess Championship! Thanks!
-                Likes:Abby
-
         PicturePost:Classic first day of school post.
             09/11/2017
             billyClassroom.jpg
             First day of Middle School Junior High!
                 Likes:Abby,Caleb
                 Comments:Caleb:I am excited to meet you
+
+        PicturePost:Future chess master here.
+            05/20/2017
+            billyChessPic.jpg
+            I am looking forward to next year's May Junior Chess Championship! Thanks!
+                Likes:Abby
 
 Caleb, Predator:
     Bio:Typical middle schooler.
@@ -81,14 +81,13 @@ Caleb, Predator:
     profilePic:Cool picture.
 
     Timeline:
-        PicturePost:Wow, boys with a "z".
-            08/18/2017
-            soccer_team.jpg
-            Great season boyz!
-
         PicturePost:Different angle of the school, I guess.
             09/13/2017
             school.jpg
             I'm psyched for my first day of school today
                 Comments:Billy:Where is this?
 
+        PicturePost:Wow, boys with a "z".
+            08/18/2017
+            soccer_team.jpg
+            Great season boyz!
