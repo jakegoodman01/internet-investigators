@@ -11,24 +11,13 @@ public class Person {
     private Timeline timeline;
     private List<Person> friends;
     private Map<String, String> hints;
+    private boolean isPredator;
 
-    /**
-     * Given variables are assigned to their corresponding fields
-     * photos is initialized as an empty ArrayList
-     * timeline is initialized as a blank Timeline
-     * feinds is initialized as a blank ArrayList
-     * @param name The name of the person
-     * @param bio The person's bio, to appear in their profile page
-     * @param profilePic The persons's profile picture, to appear in their profile page
-     */
-    public Person(String name, String bio, Photo profilePic) {
+    public Person(String name) {
         this.name = name;
-        this.bio = bio;
-        this.profilePic = new Photo(profilePic.getLink(), 100, true);
         this.photos = new ArrayList<>();
         this.timeline = new Timeline(this);
         this.friends = new ArrayList<>();
-
         this.hints = new HashMap<>();
     }
 
@@ -36,7 +25,9 @@ public class Person {
      * Getter for name
      * @return name
      */
-    public String getName() { return name; }
+    public String getName() {
+        return name.substring(0, 1).toUpperCase() + name.substring(1);
+    }
 
     /**
      * Getter for bio
@@ -92,4 +83,18 @@ public class Person {
      * @return hints
      */
     public Map<String, String> getHints() { return hints; }
+
+    public void setBio(String bio) {
+        this.bio = bio;
+    }
+
+    public void setProfilePic(Photo profilePic) {
+        this.profilePic = new Photo(profilePic.getLink(), 100, true);
+    }
+
+    public void setPredator(boolean predator) {
+        isPredator = predator;
+    }
+
+    public boolean isPredator() { return isPredator; }
 }

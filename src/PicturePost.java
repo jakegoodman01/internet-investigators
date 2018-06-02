@@ -13,13 +13,13 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 
-import java.util.Calendar;
 import java.util.Date;
 
 
 public class PicturePost extends Post {
     private Photo photo;
     private Text numLikes;
+    private StackPane stackPane;
 
     /**
      * Calls super constructor with given Date
@@ -35,7 +35,7 @@ public class PicturePost extends Post {
         super(postingDate);
 
 
-        StackPane stackPane = new StackPane();
+        this.stackPane = new StackPane();
         this.photo = photo;
 
         // white box which appears to contain the date
@@ -56,7 +56,7 @@ public class PicturePost extends Post {
         likeBox.setHeight(40);
 
         // the classic Facebook thumbs up image
-        Photo likeImage = new Photo("facebook_like.png", 40);
+        Photo likeImage = new Photo("buttons/facebook_like.png", 40);
         likeImage.setAlignment(Pos.BOTTOM_LEFT);
 
         // numlikes hoverProperty is set to display a list of all people who liked the posts
@@ -83,9 +83,14 @@ public class PicturePost extends Post {
         StackPane.setAlignment(likeBox, Pos.BOTTOM_LEFT);
         StackPane.setAlignment(dateBox, Pos.BOTTOM_RIGHT);
         StackPane.setAlignment(date, Pos.BOTTOM_RIGHT);
-        stackPane.getChildren().addAll(photo, likeBox, likeImage, dateBox, date);
+        this.stackPane.getChildren().addAll(photo, likeBox, likeImage, dateBox, date);
 
-        this.getChildren().add(stackPane);
+        this.getChildren().add(this.stackPane);
+    }
+
+    public PicturePost(PicturePost post) {
+        super(post.getPostingDate());
+        this.setStackPane(post.getStackPane());
     }
 
     /**
@@ -165,5 +170,14 @@ public class PicturePost extends Post {
     public void addLike(Person person) {
         super.addLike(person);
         numLikes.setText(Integer.toString(super.getNumLikes()));
+    }
+
+    public StackPane getStackPane() {
+        return stackPane;
+    }
+
+    public void setStackPane(StackPane s) {
+        stackPane = s;
+        this.getChildren().add(stackPane);
     }
 }

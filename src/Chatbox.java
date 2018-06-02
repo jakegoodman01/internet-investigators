@@ -1,12 +1,17 @@
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -15,20 +20,147 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
-public class Chatbox extends VBox {
-
+public class Chatbox extends StackPane {
     private HBox submitSection;
     private ScrollPane chatbox;
     private VBox chatContent;
     private Map<String, String> responder;
+    private StackPane veilPanes;
+    private StackPane questionsLeft;
+    private HBox leftNumber;
+    private String left;
+    private int levelNum;
+    private Photo toPinboard;
+    private ArrayList<HBox> text;
+    private Hint hint;
 
-    public Chatbox(String file) {
+    public Chatbox(String file, int levelNum, String left, ArrayList<HBox> text) {
         super();
+        veilPanes = new StackPane();
+        veilPanes.setPickOnBounds(false);
+        VBox layoutAll = new VBox();
+        this.left = left;
+        this.levelNum = levelNum;
+        this.text = text;
+
         initSubmitSection(file);
         initChatbox();
-        this.getChildren().addAll(chatbox, submitSection);
+        questionsLeft = new StackPane();
+        questionsLeft.setPickOnBounds(false);
+        questionsLeft.setPadding(new Insets(650, 0, 0, 450));
+        if (left.equals("0")) {
+            Button endLevel = new Button("End Level");
+            endLevel.setOnAction(e -> {}); // end of level
+            questionsLeft.getChildren().add(endLevel);
+        }
+        else {
+            leftNumber = new HBox();
+            leftNumber.getChildren().add(new Photo("screens/QuestionsLeft.png"));
+            Text t = new Text(this.left);
+            t.setFont(new Font(25));
+            leftNumber.getChildren().add(t);
+            questionsLeft.getChildren().add(leftNumber);
+        }
+        HBox topButtons = new HBox(18);
+
+        StackPane sp = new StackPane();
+        sp.setPadding(new Insets(8, 0, 0, 0));
+        toPinboard = new Photo("buttons/ToPinboard.png");
+        sp.getChildren().add(toPinboard);
+        toPinboard.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> Main.setStage(new Pinboard(levelNum, "chat", left, text), 750, 600));
+
+        Photo sound = new Photo("buttons/sound/SoundButton.png");
+        Photo soundOff = new Photo ("buttons/sound/SoundOff.png");
+        sound.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
+            BackgroundMusic.stop();
+            topButtons.getChildren().set(2, soundOff);
+        });
+        soundOff.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
+            BackgroundMusic.start();
+            topButtons.getChildren().set(2, sound);
+        });
+
+        Photo help = new Photo("buttons/help/HelpButton.png", 40, 40);
+        StackPane helpWindow = new StackPane();
+        StackPane exit1 = new StackPane();
+        exit1.setPickOnBounds(false);
+        exit1.setPadding(new Insets(10, 211-24, 386-24, 10));
+        Scene helpScene = new Scene(helpWindow);
+        Stage helpStage = new Stage();
+        helpStage.setTitle("Help");
+        helpStage.setScene(helpScene);
+        helpStage.setResizable(false);
+        helpStage.setWidth(211);
+        helpStage.setHeight(386);
+        helpStage.initStyle(StageStyle.UNDECORATED);
+        Photo profileHelp = new Photo("buttons/chatbox/ChatHelp.png");
+        Photo closeButton = new Photo ("buttons/ExitButton.png");
+        exit1.getChildren().add(closeButton);
+
+        helpWindow.getChildren().add(profileHelp);
+        helpWindow.getChildren().add(exit1);
+
+        Photo home = new Photo("buttons/HomeButton.png", 40, 40);
+        StackPane homeWindow = new StackPane();
+        StackPane exit2 = new StackPane();
+        exit2.setPadding(new Insets(5, 129, 62, 5));
+        Scene hwScene = new Scene(homeWindow);
+        Stage hwStage = new Stage();
+        hwStage.setTitle("Home");
+        hwStage.setScene(hwScene);
+        hwStage.setResizable(false);
+        hwStage.setWidth(153);
+        hwStage.setHeight(86);
+        hwStage.initStyle(StageStyle.UNDECORATED);
+        VBox menuBox = new VBox();
+        menuBox.setPadding(new Insets(30, 0, 0, 0));
+        Photo toMainMenu = new Photo("buttons/mainmenu/ToMainMenu.png");
+        Photo quitGame = new Photo("buttons/QuitGameB.png");
+        menuBox.getChildren().add(toMainMenu);
+        menuBox.getChildren().add(quitGame);
+        menuBox.setPickOnBounds(false);
+        Photo closeButton2 = new Photo ("buttons/ExitButton.png");
+        exit2.getChildren().add(closeButton2);
+
+        homeWindow.getChildren().add(new Photo("buttons/HomeMenu.png"));
+        homeWindow.getChildren().add(exit2);
+        homeWindow.getChildren().add(menuBox);
+
+        help.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> helpStage.show());
+        closeButton.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> helpStage.close());
+
+        home.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> hwStage.show());
+        closeButton2.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> hwStage.close());
+
+        toMainMenu.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
+            BackgroundMusic.stop();
+            Main.setStage(new Scene(new MainMenu()), 550, 500);
+        });
+        quitGame.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> System.exit(0));
+
+        addVeil(hwStage);
+        addVeil(helpStage);
+
+        topButtons.getChildren().add(new Photo("buttons/chatbox/ChatTitle.png"));
+        topButtons.getChildren().add(sp);
+        if (!BackgroundMusic.isPlaying()) {
+            topButtons.getChildren().add(soundOff);
+        }
+        else
+        {
+            topButtons.getChildren().add(sound);
+        }
+        topButtons.getChildren().add(help);
+        topButtons.getChildren().add(home);
+        if (left.equals("0"))
+        {
+            layoutAll.getChildren().addAll(topButtons, chatbox);
+        }
+        else {
+            layoutAll.getChildren().addAll(topButtons, chatbox, submitSection);
+        }
+        this.getChildren().addAll(layoutAll, questionsLeft, veilPanes);
     }
 
     private void initSubmitSection(String file) {
@@ -84,6 +216,31 @@ public class Chatbox extends VBox {
             if (questionChoice.getValue() != null && personChoice.getValue() != null) {
                 addMessage("You", questionChoice.getValue().toString());
                 addMessage(personChoice.getValue().toString(), responder.get(questionChoice.getValue().toString()));
+                if (!left.equals("1")) {
+                    try {
+                        left = Integer.toString(Integer.parseInt(left) - 1);
+                    } catch (NumberFormatException e) {
+                    }
+                    toPinboard.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> Main.setStage(new Pinboard(levelNum, "chat", left, text), 750, 600));
+                    Text t = new Text(left);
+                    t.setFont(new Font(25));
+                    leftNumber.getChildren().set(1, t);
+                }
+                else
+                {
+                    try {
+                        left = Integer.toString(Integer.parseInt(left) - 1);
+                    } catch (NumberFormatException e) {
+                    }
+                    toPinboard.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> Main.setStage(new Pinboard(levelNum, "chat", left, text), 750, 600));
+                    submitSection.getChildren().removeAll(personChoice, questionChoice, submit);
+                    this.getChildren().remove(submitSection);
+                    // add suspicion in text
+                    Button endLevel = new Button("End Level");
+                    endLevel.setOnAction(e -> {}); // end of level
+                    questionsLeft.getChildren().set(0, endLevel);
+                    return;
+                }
             }
         });
 
@@ -91,7 +248,6 @@ public class Chatbox extends VBox {
         HBox.setMargin(personChoice, new Insets(40, 20, 40, 20));
         HBox.setMargin(questionChoice, new Insets(40, 20, 40, 20));
         HBox.setMargin(submit, new Insets(40, 20, 40, 20));
-
     }
 
     public static int numOfTabs(String line) {
@@ -115,6 +271,10 @@ public class Chatbox extends VBox {
     private void initChatbox() {
         chatbox = new ScrollPane();
         chatContent = new VBox(10);
+        for (HBox line : text)
+        {
+            chatContent.getChildren().add(line);
+        }
         chatbox.setMinHeight(500);
         chatbox.setMinWidth(400);
         chatbox.setContent(chatContent);
@@ -137,6 +297,8 @@ public class Chatbox extends VBox {
 
         line.getChildren().addAll(personName, chatMessage);
         chatContent.getChildren().add(line);
+        text.add(line);
+        toPinboard.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> Main.setStage(new Pinboard(levelNum, "chat", left, text), 750, 600));
     }
 
     public void addMessage(String name, Photo photo) {
@@ -150,6 +312,20 @@ public class Chatbox extends VBox {
 
         line.getChildren().addAll(personName, chatPhoto);
         chatContent.getChildren().add(line);
+        text.add(line);
+        toPinboard.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> Main.setStage(new Pinboard(levelNum, "chat", left, text), 750, 600));
+    }
+
+    private void addVeil(Stage stage)
+    {
+        StackPane vPane = new StackPane();
+        Region veil = new Region();
+        veil.setStyle("-fx-background-color: rgba(0, 0, 0, 0.3)");
+        veil.setVisible(false);
+        veil.visibleProperty().bind(stage.showingProperty());
+        vPane.getChildren().add(veil);
+        vPane.setPickOnBounds(false);
+        veilPanes.getChildren().add(vPane);
     }
 
 }

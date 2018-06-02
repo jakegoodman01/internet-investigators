@@ -1,6 +1,5 @@
 import javafx.scene.layout.HBox;
 
-import java.util.Calendar;
 import java.util.Date;
 import java.util.ArrayList;
 
@@ -108,5 +107,12 @@ public abstract class Post extends HBox {
 
     public void setHint(String hint) {
         this.hint = hint;
+    }
+
+    public Post clone() {
+        if (this instanceof PicturePost) {
+            return new PicturePost((PicturePost)this);
+        }
+        return new TextPost((TextPost)this);
     }
 }

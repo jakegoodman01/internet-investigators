@@ -11,6 +11,7 @@ import java.util.*;
 public class LevelBuilder {
 
     private List<Person> persons = new ArrayList<>();
+    private Map<String, Person> personMap = new HashMap<>();
 
     /**
      * Reads from a text file, which describes each character from a level
@@ -35,18 +36,39 @@ public class LevelBuilder {
             String line; // current line of the file
             String name = ""; // name of the character that is currently being created
             String bio = ""; // bio of the character that is currently being created
-            String currLevel = file.substring(23, 29); // the level that is being created, e.g. level2 or level3
+            String currLevel = file.substring(22, 28); // the level that is being created, e.g. level2 or level3
             String hint = null; // represents a hint that must be entered later on
             boolean readBio = false; // indicates weather the bio is currently being read
             boolean readTimeline = false; // indicates weather the timeline is currently being read
             boolean picturePost = false; // indicates weather a PicturePost is currently being created
+            boolean isPredator = false;
             String photoLink = null; // link to a photo
             Post post = null; // the most recent created Post
             Date date = null;
+            boolean firstLine = true;
+            int pIndex = -1;
             while ((line = br.readLine()) != null) {
+                if (firstLine) {
+                    String[] names = line.split(",");
+                    for (String s : names) {
+                        Person person = new Person(s);
+                        persons.add(person);
+                        personMap.put(s, person);
+                    }
+                }
                 switch (LevelBuilder.numOfTabs(line)) {
                     case 0:
-                        name = line.substring(0, line.indexOf(','));
+                        if (firstLine) {
+                            firstLine = false;
+                        } else {
+                            if (line.equals("")) continue;
+                            name = line.substring(0, line.indexOf(','));
+                            String s = line.substring(line.indexOf(',') + 2);
+                            isPredator = s.equals("Predator:");
+
+                            pIndex++;
+                            persons.get(pIndex).setPredator(isPredator);
+                        }
                         break;
                     case 1:
                         readBio = line.substring(4, 8).equals("Bio:");
@@ -56,7 +78,7 @@ public class LevelBuilder {
                         } else {
                             readTimeline = line.substring(4).equals("Timeline:");
                             if (!readTimeline) {
-                                persons.get(persons.size() - 1).getHints().put(
+                                persons.get(pIndex).getHints().put(
                                         line.substring(4, line.indexOf(':')),
                                         line.substring(line.indexOf(':') + 1)
                                 );
@@ -67,7 +89,7 @@ public class LevelBuilder {
                         if (readBio) {
                             bio += line.substring(8);
                         } else {
-                            picturePost = line.substring(8).equals("PicturePost:");
+                            picturePost = line.substring(8, 20).equals("PicturePost:");
                             hint = line.substring(line.indexOf(':') + 1);
                         }
                         break;
@@ -118,18 +140,31 @@ public class LevelBuilder {
                             }
                         }
                         break;
+                    case 4:
+                        if (line.substring(16, 22).equals("Likes:")) {
+                            String[] peopleLiked = line.substring(22).split(",");
+                            for (String str : peopleLiked) {
+                                post.addLike(personMap.get(str));
+                            }
+                        } else {
+                            String[] peopleCommented = line.substring(25).split(",");
+                            for (String str : peopleCommented) {
+                                String[] comment = str.split(":");
+                                post.addComment(personMap.get(comment[0]), comment[1]);
+                            }
+                        }
+                        break;
                     default:
                         if (readBio) {
                             String firstNameLower = name.toLowerCase();
                             // creates a person with their name, bio and profile picture
-                            persons.add(new Person(
-                                    name,
-                                    bio,
+                            persons.get(pIndex).setBio(bio);
+                            persons.get(pIndex).setProfilePic(
                                     new Photo(String.format("levels/%s/%s/profile.jpg",
                                             currLevel, firstNameLower
                                     ))
-                            ));
-                            persons.get(persons.size() - 1).getHints().put(
+                            );
+                            persons.get(pIndex).getHints().put(
                                     "bio", hint
                             );
                             // loops through the images in the character's photos package and adds each one to the
@@ -143,7 +178,7 @@ public class LevelBuilder {
                                 );
                             } else {
                                 for (File photo: files) {
-                                    persons.get(persons.size() - 1).addPhoto(new Photo(
+                                    persons.get(pIndex).addPhoto(new Photo(
                                             photo.toString().substring(4),
                                             200));
                                 }
@@ -151,7 +186,7 @@ public class LevelBuilder {
                         } else if (readTimeline) {
                             // adds the most recent post to the character's timeline
                             post.setHint(hint);
-                            persons.get(persons.size() - 1).getTimeline().addPost(post);
+                            persons.get(pIndex).getTimeline().addPost(post);
                         }
                 }
             }

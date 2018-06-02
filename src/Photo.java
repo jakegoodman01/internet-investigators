@@ -2,6 +2,13 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
+/**
+ * @author Jake Goodman
+ * @since 2018-05-14
+ * @version 1
+ *
+ * Time spent: 4 hours
+ */
 public class Photo extends HBox {
     private ImageView imageView;
     private Image image;
@@ -38,6 +45,23 @@ public class Photo extends HBox {
         imageView = new ImageView(image);
         imageView.setPreserveRatio(true);
         imageView.setFitHeight(height);
+        this.getChildren().addAll(imageView);
+    }
+
+    /**
+     * Same function as the basic constructor
+     * Sets the height and width to a given height/width
+     * @param link URL of the photo
+     * @param height height of the photo
+     * @param width width of the photo
+     */
+    public Photo(String link, int height, int width) {
+        super();
+        this.link = link;
+        image = new Image(link);
+        imageView = new ImageView(image);
+        imageView.setFitHeight(height);
+        imageView.setFitWidth(width);
         this.getChildren().addAll(imageView);
     }
 

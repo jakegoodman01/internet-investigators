@@ -13,18 +13,18 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 
-import java.util.Calendar;
 import java.util.Date;
 
 public class TextPost extends Post {
     TextArea text;
     private Text numLikes;
+    private StackPane stackPane;
 
     public TextPost (Date postingDate, TextArea text) {
         super(postingDate);
         this.text = text;
 
-        StackPane stackPane = new StackPane();
+        stackPane = new StackPane();
 
         Rectangle dateBox = new Rectangle();
         dateBox.setFill(Color.WHITESMOKE);
@@ -40,7 +40,7 @@ public class TextPost extends Post {
         likeBox.setWidth(100);
         likeBox.setHeight(40);
 
-        Photo likeImage = new Photo("facebook_like.png", 40);
+        Photo likeImage = new Photo("buttons/facebook_like.png", 40);
         likeImage.setAlignment(Pos.BOTTOM_LEFT);
 
         numLikes = new Text("0");
@@ -68,6 +68,11 @@ public class TextPost extends Post {
         stackPane.getChildren().addAll(text, likeBox, likeImage, dateBox, date);
 
         this.getChildren().add(stackPane);
+    }
+
+    public TextPost(TextPost post) {
+        super(post.getPostingDate());
+        this.setStackPane(post.getStackPane());
     }
 
     public TextArea getText() {
@@ -109,5 +114,25 @@ public class TextPost extends Post {
     @Override
     public void addComments(Person[] people, String[] comments) {
         text.addComments(people, comments);
+    }
+
+    /**
+     * Adds one like to this post
+     * Increments numLikes by one
+     * @param person person who left the like
+     */
+    @Override
+    public void addLike(Person person) {
+        super.addLike(person);
+        numLikes.setText(Integer.toString(super.getNumLikes()));
+    }
+
+    public StackPane getStackPane() {
+        return stackPane;
+    }
+
+    public void setStackPane(StackPane s) {
+        stackPane = s;
+        this.getChildren().add(stackPane);
     }
 }

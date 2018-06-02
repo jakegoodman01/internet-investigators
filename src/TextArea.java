@@ -6,6 +6,13 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.*;
 
+/**
+ * @author Jake Goodman
+ * @since 2018-05-15
+ * @version 1
+ *
+ * Time spent on profile related classes: 7 hours
+ * */
 public class TextArea extends ScrollPane {
 
     private VBox vBox;
@@ -103,7 +110,7 @@ public class TextArea extends ScrollPane {
         StackPane content = new StackPane();
         content.getChildren().addAll(rect, vBox);
 
-        this.setPrefSize(400, 400);
+        this.setPrefSize(400, 100);
         this.setContent(content);
     }
 

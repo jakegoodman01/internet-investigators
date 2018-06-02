@@ -5,69 +5,228 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.shape.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
-public class Profile extends GridPane {
+import java.util.ArrayList;
 
-    /**
-     * Places all elements of a Person onto a nice looking profile page!
-     * @param person Person for a profile page
-     */
-    public Profile(Person person) {
+/**
+ * @author Nathan Henry and Jake Goodman
+ * @since 2018-05-17
+ * @version 4 (current version)
+ *
+ * Version 4:
+ * Author: Jake Goodman
+ * Date: 2018-05-28
+ * Description: Fixed bugs on timeline and connected all the panes in timeline
+ * Time spent: (profile related classes) 4
+ *
+ * Version 3:
+ * Author: Nathan Henry
+ * Date: 2018-05-26
+ * Description: Added veils and made small modifications to profile.
+ * Also added the top buttons (mainmenu, toPinboard, sound, help, and home).
+ *
+ * Version 2:
+ * Author: Jake Goodman
+ * Date: 2018-05-20
+ * Description: Replaced the number guidelines with parts of a profile (and worked on other profile-related classes)
+ * Hours spent: (on all profile related classes) 7 hours
+ *
+ * Version 1:
+ * Author: Nathan Henry
+ * Date: 2018-05-17
+ * Description: Set the numbers and properties for the sections in the profile page
+ * Hours spent: 2 hours
+ */
+public class Profile extends StackPane {
+
+    private GridPane gridPane;
+    private static StackPane veilPanes;
+    private static StackPane hintPane;
+
+    public Profile(Person person, int levelNum) {
         super();
-        this.setPadding(new Insets(1, 1, 20, 1));
-        this.setVgap(5);
-        this.setHgap(5);
+        gridPane = new GridPane();
+        gridPane.setPadding(new Insets(1, 1, 20, 1));
+        gridPane.setVgap(5);
+        gridPane.setHgap(5);
+
+        veilPanes = new StackPane();
+        hintPane = new StackPane();
 
         for (int i = 0; i < 11; i++) {
             for (int j = 0; j < 10; j++) {
-                if (j == 0 && i == 0) {
-                    // report button
-                    black(45 * 3 - 20, 43, j, i, 3, 1, new Insets(5, 0, 5, 25));
+                if (j == 0 && i == 0) {   // mainmenu button
+                    StackPane sp = new StackPane();
+                    Photo reportButton = new Photo("buttons/report/ReportButton.png");
+                    sp.getChildren().add(reportButton);
+                    gridPane.add(sp, j, i, 3, 1);
+                    GridPane.setMargin(sp, new Insets(15, 0, 0, 25));
+
+                    StackPane reportWin = new StackPane();
+                    Scene scene = new Scene(reportWin);
+                    Stage stage = new Stage();
+                    stage.setTitle("Home");
+                    stage.setScene(scene);
+                    stage.setResizable(false);
+                    stage.setWidth(235);
+                    stage.setHeight(107);
+                    stage.initStyle(StageStyle.UNDECORATED);
+                    BorderPane yesNo = new BorderPane();
+                    yesNo.setPickOnBounds(false);
+                    HBox buttons = new HBox(20);
+                    buttons.setPadding(new Insets(0, 0, 5, 25));
+                    buttons.setPickOnBounds(false);
+                    Photo yes = new Photo("buttons/YesButton.png");
+                    Photo no = new Photo("buttons/NoButton.png");
+                    buttons.getChildren().addAll(yes, no);
+                    yesNo.setBottom(buttons);
+                    reportWin.getChildren().addAll(new Photo("buttons/report/ReportWindow.png"), yesNo);
+
+                    reportButton.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> stage.show());
+
+                    yes.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
+                        if (person.isPredator())
+                            FinalResults.addWin();
+                        else
+                            FinalResults.addLoss();
+                        stage.close();
+                        Main.setStage(new FinalResults(), 550, 500);
+                    });
+
+                    no.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> stage.close());
+
+                    addVeil(stage, "");
                     j += 2;
                 } else if (j == 4 && i == 0) {
                     // "To Pinboard"
-                    black(45 * 2 + 15, 43, j, i, 2, 1);
+                    StackPane sp = new StackPane();
+                    Photo toPinboard = new Photo("buttons/ToPinboard.png");
+                    sp.getChildren().add(toPinboard);
+                    gridPane.add(sp, j, i, 2, 1);
+                    GridPane.setMargin(sp, new Insets(15, 0, 0, 0));
+
+                    toPinboard.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> Main.setStage(new Pinboard(levelNum, "profile", "",  new ArrayList<HBox>()), 750, 600));
                     j++;
-                } else if (j == 6 && i == 0) {
-                    // Help
-                    black(40, 40, j, i, 1, 1, new Insets(5, 3, 5, 0));
                 } else if (j == 7 && i == 0) {
-                    // Sound
-                    black(40, 40, j, i, 1, 1, new Insets(5, 3, 5, 0));
-                } else if (j == 8 && i == 0) {
-                    // Home Menu
-                    black(40, 40, j, i, 1, 1, new Insets(5, 5, 5, 0));
+                    // Top buttons (sound, help, and home)
+                    GridPane topButtons = new GridPane();
+                    topButtons.setPadding(new Insets(10, 0, 0, 0));
+                    Photo sound = new Photo("buttons/sound/SoundButton.png");
+                    Photo soundOff = new Photo("buttons/sound/SoundOff.png");
+                    sound.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
+                        BackgroundMusic.stop();
+                        topButtons.getChildren().set(0, soundOff);
+                    });
+                    soundOff.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
+                        BackgroundMusic.start();
+                        topButtons.getChildren().set(0, sound);
+                    });
+                    Photo help = new Photo("buttons/help/HelpButton.png", 40, 40);
+                    StackPane helpWindow = new StackPane();
+                    StackPane exit1 = new StackPane();
+                    exit1.setPickOnBounds(false);
+                    exit1.setPadding(new Insets(10, 211-24, 423-24, 10));
+                    Scene helpScene = new Scene(helpWindow);
+                    Stage helpStage = new Stage();
+                    helpStage.setTitle("Help");
+                    helpStage.setScene(helpScene);
+                    helpStage.setResizable(false);
+                    helpStage.setWidth(211);
+                    helpStage.setHeight(423);
+                    helpStage.initStyle(StageStyle.UNDECORATED);
+                    Photo profileHelp = new Photo("buttons/help/ProfileHelp.png");
+                    Photo closeButton = new Photo("buttons/ExitButton.png");
+                    exit1.getChildren().add(closeButton);
+
+                    helpWindow.getChildren().add(profileHelp);
+                    helpWindow.getChildren().add(exit1);
+
+                    Photo home = new Photo("buttons/HomeButton.png", 40, 40);
+                    StackPane homeWindow = new StackPane();
+                    StackPane exit2 = new StackPane();
+                    exit2.setPadding(new Insets(5, 129, 62, 5));
+                    Scene hwScene = new Scene(homeWindow);
+                    Stage hwStage = new Stage();
+                    hwStage.setTitle("Home");
+                    hwStage.setScene(hwScene);
+                    hwStage.setResizable(false);
+                    hwStage.setWidth(153);
+                    hwStage.setHeight(86);
+                    hwStage.initStyle(StageStyle.UNDECORATED);
+                    VBox menuBox = new VBox();
+                    menuBox.setPadding(new Insets(30, 0, 0, 0));
+                    Photo toMainMenu = new Photo("buttons/mainmenu/ToMainMenu.png");
+                    Photo quitGame = new Photo("buttons/QuitGameB.png");
+                    menuBox.getChildren().add(toMainMenu);
+                    menuBox.getChildren().add(quitGame);
+                    menuBox.setPickOnBounds(false);
+                    Photo closeButton2 = new Photo("buttons/ExitButton.png");
+                    exit2.getChildren().add(closeButton2);
+
+                    homeWindow.getChildren().add(new Photo("buttons/HomeMenu.png"));
+                    homeWindow.getChildren().add(exit2);
+                    homeWindow.getChildren().add(menuBox);
+
+                    help.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> helpStage.show());
+                    closeButton.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> helpStage.close());
+
+                    home.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> hwStage.show());
+                    closeButton2.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> hwStage.close());
+
+                    toMainMenu.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
+                        BackgroundMusic.stop();
+                        Main.setStage(new Scene(new MainMenu()), 550, 500);
+                    });
+                    quitGame.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> System.exit(0));
+
+
+                    topButtons.setHgap(10);
+                    if (!BackgroundMusic.isPlaying()) {
+                        topButtons.add(soundOff, 0, 0);
+                    }
+                    else
+                    {
+                        topButtons.add(sound, 0, 0);
+                    }
+                    topButtons.add(help, 1, 0);
+                    topButtons.add(home, 2, 0);
+
+                    gridPane.add(topButtons, j, i, 3, 1);
+                    j+=2;
+
+                    addVeil(helpStage, "");
+                    addVeil(hwStage, "");
                 } else if (j == 0 && i == 1) {
                     // Profile Picture
                     Photo profilePic = person.getRawProfilePic();
+                    Scene scene = new Scene(person.getNewProfilePic());
+                    Stage stage = new Stage();
+                    stage.setTitle(String.format("%s's Profile Picture", person.getName()));
+                    stage.setScene(scene);
+                    stage.setResizable(false);
                     profilePic.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-                        Scene scene = new Scene(person.getNewProfilePic());
-                        Stage stage = new Stage();
-                        stage.setTitle(String.format("%s's Profile Picture", person.getName()));
-                        stage.setScene(scene);
-                        stage.setResizable(false);
                         stage.show();
                         event.consume();
                     });
-                    this.add(profilePic, j, i, 3, 2);
+                    gridPane.add(profilePic, j, i, 3, 2);
                     GridPane.setMargin(profilePic, new Insets(0, 0, 0, 25));
+                    addVeil(stage, person.getHints().get("profilePic"));
                     j += 2;
                 } else if (j == 3 && i == 1) {
                     // Name
                     Text name = new Text(person.getName());
                     name.setWrappingWidth(45 * 2);
                     name.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 25));
-                    this.add(name, j, i, 2, 1);
+                    gridPane.add(name, j, i, 2, 1);
                     GridPane.setMargin(name, new Insets(15, 40, 0, 0));
                     j++;
                 } else if (j == 0 && i == 2) {
@@ -84,83 +243,80 @@ public class Profile extends GridPane {
 
                     text.setFont(new Font(15));
                     VBox bio = new VBox(text);
-                    bio.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-                        Text t = new Text(person.getBio());
-                        t.setWrappingWidth(360);
-                        t.setFont(new Font(20));
-                        VBox root = new VBox(t);
-                        root.setPadding(new Insets(20, 20, 20, 20));
-                        Scene scene = new Scene(root);
-                        Stage stage = new Stage();
-                        stage.setMaxWidth(400);
-                        stage.setTitle("Bio");
-                        stage.setScene(scene);
-                        stage.setResizable(false);
-                        stage.show();
-                    });
-                    this.add(bio, j, i, 7, 1);
+                    Text t = new Text(person.getBio());
+                    t.setWrappingWidth(360);
+                    t.setFont(new Font(20));
+                    VBox root = new VBox(t);
+                    root.setPadding(new Insets(20, 20, 20, 20));
+                    Scene scene = new Scene(root);
+                    Stage stage = new Stage();
+                    stage.setMaxWidth(400);
+                    stage.setTitle("Bio");
+                    stage.setScene(scene);
+                    stage.setResizable(false);
+                    bio.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> stage.show());
+                    gridPane.add(bio, j, i, 7, 1);
                     GridPane.setMargin(bio, new Insets(0, 40, 0, 0));
+                    addVeil(stage, person.getHints().get("bio"));
                     j += 7;
                 } else if (j == 0 && i == 4) {
                     // pictures and friends section with dropdown menus
                     Button photos = new Button("Photos");
                     photos.setMinHeight(43 * 5 / 2);
                     photos.setMinWidth(45 * 3 - 20);
+                    GridPane root = new GridPane();
+                    root.setHgap(20);
+                    root.setVgap(20);
 
-                    photos.setOnAction(e -> {
-                        GridPane root = new GridPane();
-                        root.setHgap(20);
-                        root.setVgap(20);
-
-                        int photoIndex = 0;
-                        for (int k = 0; k < 3; k++) {
-                            for (int m = 0; m < 3; m++) {
-                                if (photoIndex < person.getPhotos().size()) {
-                                    root.add(person.getPhotos().get(photoIndex), k, m);
-                                    photoIndex++;
-                                } else {
-                                    break;
-                                }
+                    int photoIndex = 0;
+                    for (int k = 0; k < 3; k++) {
+                        for (int m = 0; m < 3; m++) {
+                            if (photoIndex < person.getPhotos().size()) {
+                                root.add(person.getPhotos().get(photoIndex), k, m);
+                                photoIndex++;
+                            } else {
+                                break;
                             }
                         }
-                        Scene scene = new Scene(root);
-                        Stage stage = new Stage();
-                        stage.setTitle("Photos");
-                        stage.setScene(scene);
-                        stage.setResizable(false);
-                        stage.show();
-                    });
+                    }
+                    Scene scene = new Scene(root);
+                    Stage stage = new Stage();
+                    stage.setTitle("Photos");
+                    stage.setScene(scene);
+                    stage.setResizable(false);
 
-                    this.add(photos, j, i, 3, 5);
-                    GridPane.setMargin(photos, new Insets(10, 10, 10, 10));
+                    photos.setOnAction(e -> stage.show());
+
+                    gridPane.add(photos, j, i, 3, 5);
+                    GridPane.setMargin(photos, new Insets(10, 10, 10, 25));
+
+                    addVeil(stage, person.getHints().get("photos"));
 
                     Button friends = new Button("Friends");
                     friends.setMinHeight(43 * 5 / 2);
                     friends.setMinWidth(45 * 3 - 20);
 
-                    friends.setOnAction(e -> {
-                        ListView<String> list = new ListView<>();
-                        ObservableList<String> items = FXCollections.observableArrayList();
-                        for (Person p : person.getFriends()) {
-                            items.add(p.getName());
-                        }
-                        list.setItems(items);
-                        Scene scene = new Scene(list);
-                        Stage stage = new Stage();
-                        stage.setTitle("Friends");
-                        stage.setScene(scene);
-                        stage.setResizable(false);
-                        stage.show();
+                    ListView<String> list = new ListView<>();
+                    ObservableList<String> items = FXCollections.observableArrayList();
+                    for (Person p : person.getFriends()) {
+                        items.add(p.getName());
+                    }
+                    list.setItems(items);
+                    Scene scene2 = new Scene(list);
+                    Stage stage2 = new Stage();
+                    stage2.setTitle("Friends");
+                    stage2.setScene(scene2);
+                    stage2.setResizable(false);
+                    friends.setOnAction(e -> stage2.show());
 
-                    });
-
-                    this.add(friends, j, i + 6, 3, 5);
-                    GridPane.setMargin(friends, new Insets(10, 10, 10, 10));
+                    gridPane.add(friends, j, i + 6, 3, 5);
+                    GridPane.setMargin(friends, new Insets(10, 10, 10, 25));
+                    addVeil(stage2, person.getHints().get("friends"));
                     j += 10;
                     i += 10;
                 } else if (j == 3 && i == 3) {
                     // timeline
-                    this.add(person.getTimeline(), j, i, 7, 8);
+                    gridPane.add(person.getTimeline(), j, i, 7, 8);
                     GridPane.setMargin(person.getTimeline(), new Insets(20, 40, 70, 0));
                     j += 7;
                 } else {
@@ -169,19 +325,37 @@ public class Profile extends GridPane {
                 }
             }
         }
+
+        StackPane pPane = new StackPane();
+        pPane.setPadding(new Insets(135, 0, 10, 150));
+        pPane.getChildren().add(gridPane);
+        veilPanes.setPickOnBounds(false);
+        hintPane.setPickOnBounds(false);
+        this.getChildren().addAll(pPane, veilPanes, hintPane);
     }
 
     private void white(int width, int height, int colI, int rowI, int colSpan, int rowSpan) {
-        this.add(new Rectangle(width, height, Color.WHITESMOKE), colI, rowI, colSpan, rowSpan);
+        gridPane.add(new Rectangle(width, height, Color.WHITESMOKE), colI, rowI, colSpan, rowSpan);
     }
 
-    private void black(int width, int height, int colI, int rowI, int colSpan, int rowSpan) {
-        this.add(new Rectangle(width, height, Paint.valueOf("#000000")), colI, rowI, colSpan, rowSpan);
-    }
+    public static void addVeil(Stage stage, String hintText)
+    {
+        StackPane vPane = new StackPane();
+        Region veil = new Region();
+        veil.setStyle("-fx-background-color: rgba(0, 0, 0, 0.3)");
+        veil.setVisible(false);
+        veil.visibleProperty().bind(stage.showingProperty());
+        vPane.getChildren().add(veil);
+        vPane.setPickOnBounds(false);
+        veilPanes.getChildren().add(vPane);
 
-    private void black(int width, int height, int colI, int rowI, int colSpan, int rowSpan, Insets insets) {
-        Rectangle r = new Rectangle(width, height, Paint.valueOf("#000000"));
-        this.add(r, colI, rowI, colSpan, rowSpan);
-        GridPane.setMargin(r, insets);
+        if (!hintText.equals("")) {
+            StackPane hPane = new StackPane();
+            Hint hint = new Hint(hintText);
+            hint.visibleProperty().bind(stage.showingProperty());
+            hPane.getChildren().add(hint);
+            hPane.setPickOnBounds(false);
+            hintPane.getChildren().add(hPane);
+        }
     }
 }
