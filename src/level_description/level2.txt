@@ -1,0 +1,2 @@
+Edith, Normal:
+    What's your name?|Edith
