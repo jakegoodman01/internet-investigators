@@ -267,15 +267,19 @@ public class Profile extends StackPane {
                     root.setHgap(20);
                     root.setVgap(20);
 
-                    int photoIndex = 0;
-                    for (int k = 0; k < 3; k++) {
-                        for (int m = 0; m < 3; m++) {
-                            if (photoIndex < person.getPhotos().size()) {
-                                Photo p = person.getPhotos().get(photoIndex);
-                                root.add(new Photo(p.getLink(), 200), k, m);
-                                photoIndex++;
-                            } else {
-                                break;
+                    if (person.getPhotos().size() == 0) {
+                        root.add(new Photo("buttons/NoPhotos.png"), 0, 0);
+                    } else {
+                        int photoIndex = 0;
+                        for (int k = 0; k < 3; k++) {
+                            for (int m = 0; m < 3; m++) {
+                                if (photoIndex < person.getPhotos().size()) {
+                                    Photo p = person.getPhotos().get(photoIndex);
+                                    root.add(new Photo(p.getLink(), 200), k, m);
+                                    photoIndex++;
+                                } else {
+                                    break;
+                                }
                             }
                         }
                     }
