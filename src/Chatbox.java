@@ -281,24 +281,32 @@ public class Chatbox extends StackPane {
     }
 
     public void addMessage(String name, String message) {
-        HBox line = new HBox(30);
+        if (message.substring(message.length() - 4).equals(".jpg")
+        ) {
+            Photo photo = new Photo(String.format(
+                    "levels/level%s/%s", levelNum, message
+            ));
+            addMessage(name, photo);
+        } else {
+            HBox line = new HBox(30);
 
-        Text personName = new Text(name + ":");
-        personName.setFont(new Font(20));
-        if (personName.getText().equals("You:"))
-            personName.setFill(Color.BLUE);
-        else
-            personName.setFill(Color.RED);
+            Text personName = new Text(name + ":");
+            personName.setFont(new Font(20));
+            if (personName.getText().equals("You:"))
+                personName.setFill(Color.BLUE);
+            else
+                personName.setFill(Color.RED);
 
-        Text chatMessage = new Text(message);
-        chatMessage.setFont(new Font(20));
-        chatMessage.setFill(Color.BLACK);
-        chatMessage.setWrappingWidth(450);
+            Text chatMessage = new Text(message);
+            chatMessage.setFont(new Font(20));
+            chatMessage.setFill(Color.BLACK);
+            chatMessage.setWrappingWidth(450);
 
-        line.getChildren().addAll(personName, chatMessage);
-        chatContent.getChildren().add(line);
-        text.add(line);
-        toPinboard.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> Main.setStage(new Pinboard(levelNum, "chat", left, text), 750, 600));
+            line.getChildren().addAll(personName, chatMessage);
+            chatContent.getChildren().add(line);
+            text.add(line);
+            toPinboard.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> Main.setStage(new Pinboard(levelNum, "chat", left, text), 750, 600));
+        }
     }
 
     public void addMessage(String name, Photo photo) {
