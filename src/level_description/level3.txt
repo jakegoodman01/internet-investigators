@@ -1,0 +1,54 @@
+Dorothy,Eden,Frederick,Greg
+
+Dorothy, Normal:
+    Bio:Seems pretty self-explanatory
+        Volleyball!
+
+    photos:She seems like a pro!
+
+    friends:Nothing interesting here
+
+    profilePic:Well, what else did you expect!
+
+    Timeline:
+        PicturePost:Ok, so she's got a life outside of volleyball.
+            07/11/2017
+            girls.jpg
+            Fun day with my girls!
+                Likes:Eden
+                Comments:Eden:Invite me next time girl! You guys are so cute!
+
+        PicturePost:Summer birthday?? Not that relevant I guess...
+            07/03/2017
+            scooter.jpg
+            My mom got me a scooter for my birthday!
+                Likes:Eden
+
+        PicturePost:Sponsored, eh? Didn't know kids get sponsored.
+            06/22/2017
+            nationals.jpg
+            Thanks REDBULL for sending me and my team to nationals!
+                Likes:Eden
+                Comments:Eden:OMG! You're sooooo great!
+
+Eden, Predator:
+    Bio:It's cheesy but it sure is motivational!
+        With the right kind of determination, you can accomplish anything!
+
+    photos:I mean, maybe she's self conscious?
+
+    friends:Nothing interesting here
+
+    profilePic:Must be a fan!
+
+    Timeline:
+        PicturePost:Well it was nice out that day!
+            09/20/2017
+            sun.jpg
+            Walked to school today, such a nice day!
+        TextPost:Try hard much?
+            09/11/2017
+            Hello! I just started at Middle School Junior High, and I don’t know anybody. If you would like to hang out with me, see me at the woodbine subway, right by my house after school! Thanks guys!
+                Likes:Dorothy
+                Comments:Dorothy:Woodbine is like 2 hours from school. How about we meet somewhere closer?,Eden:Oh true. We can meet closer!
+
