@@ -159,7 +159,7 @@ public class Pinboard extends Scene {
             for (Person p : persons) {
                 pButton = new Photo("buttons/name_buttons/" + p.getName() + "Button.png");
                 pButton.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
-                    this.setRoot(new Profile(p, 1));
+                    this.setRoot(new Profile(p, levelNum));
                     e.consume();
                 });
                 nameButtons.getChildren().add(pButton);
