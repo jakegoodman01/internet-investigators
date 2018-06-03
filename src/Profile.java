@@ -208,7 +208,7 @@ public class Profile extends StackPane {
                 } else if (j == 0 && i == 1) {
                     // Profile Picture
                     Photo profilePic = person.getRawProfilePic();
-                    Scene scene = new Scene(person.getNewProfilePic());
+                    Scene scene = new Scene(person.getNewProfilePic(300));
                     Stage stage = new Stage();
                     stage.setTitle(String.format("%s's Profile Picture", person.getName()));
                     stage.setScene(scene);
@@ -224,7 +224,6 @@ public class Profile extends StackPane {
                 } else if (j == 3 && i == 1) {
                     // Name
                     Text name = new Text(person.getName());
-                    name.setWrappingWidth(45 * 2);
                     name.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 25));
                     gridPane.add(name, j, i, 2, 1);
                     GridPane.setMargin(name, new Insets(15, 40, 0, 0));
@@ -272,7 +271,8 @@ public class Profile extends StackPane {
                     for (int k = 0; k < 3; k++) {
                         for (int m = 0; m < 3; m++) {
                             if (photoIndex < person.getPhotos().size()) {
-                                root.add(person.getPhotos().get(photoIndex), k, m);
+                                Photo p = person.getPhotos().get(photoIndex);
+                                root.add(new Photo(p.getLink(), 200), k, m);
                                 photoIndex++;
                             } else {
                                 break;
