@@ -44,9 +44,10 @@ public class Person {
     /**
      * Getter for profilePic, as a copied object
      * This is to avoid an error caused by the same object being used in two different stages
+     * @param height the height of the new phot
      * @return A new Photo that is identical to profilePic but as a different object reference
      */
-    public Photo getNewProfilePic() { return new Photo(profilePic.getLink()); }
+    public Photo getNewProfilePic(int height) { return new Photo(profilePic.getLink(), height); }
 
     /**
      * Getter for photos
