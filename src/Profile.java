@@ -207,7 +207,7 @@ public class Profile extends StackPane {
                     addVeil(hwStage, "");
                 } else if (j == 0 && i == 1) {
                     // Profile Picture
-                    Photo profilePic = person.getRawProfilePic();
+                    Photo profilePic = person.getNewProfilePic(100);
                     Scene scene = new Scene(person.getNewProfilePic(300));
                     Stage stage = new Stage();
                     stage.setTitle(String.format("%s's Profile Picture", person.getName()));
