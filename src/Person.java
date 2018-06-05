@@ -36,12 +36,6 @@ public class Person {
     public String getBio() { return bio; }
 
     /**
-     * Getter for profilePic
-     * @return profilePic
-     */
-    public Photo getRawProfilePic() { return profilePic; }
-
-    /**
      * Getter for profilePic, as a copied object
      * This is to avoid an error caused by the same object being used in two different stages
      * @param height the height of the new phot
