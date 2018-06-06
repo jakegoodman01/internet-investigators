@@ -71,17 +71,6 @@ public abstract class Post extends HBox {
     }
 
     /**
-     * Adds 1 like for each person given in parameter
-     * @param people list of people who liked the post
-     */
-    public void addLikes(Person[] people) {
-        for (Person p : people) {
-            numLikes++;
-            peopleLiked.add(p);
-        }
-    }
-
-    /**
      * Getter for numLikes
      * @return numLikes
      */
@@ -101,14 +90,27 @@ public abstract class Post extends HBox {
         return people;
     }
 
+    /**
+     * Getter for hint
+     * @return hint
+     */
     public String getHint() {
         return hint;
     }
 
+    /**
+     * Setter for hint
+     * @param hint hint to be set
+     */
     public void setHint(String hint) {
         this.hint = hint;
     }
 
+    /**
+     * Method to clone a post
+     * This method makes use of the constructor in each child class of post, that returns a clone of itself
+     * @return
+     */
     public Post clone() {
         if (this instanceof PicturePost) {
             return new PicturePost((PicturePost)this);

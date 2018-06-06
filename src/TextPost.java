@@ -20,29 +20,43 @@ public class TextPost extends Post {
     private Text numLikes;
     private StackPane stackPane;
 
+    /**
+     * Calls super constructor with given Date
+     * text is initialized to given TextArea
+     * Sets up view for a text post which contains: box to display the date, box to display the number of likes,
+     *                                                 and a list of the people who liked the post is displayed upon
+     *                                                 hovering the number of likes
+     * @param postingDate the Date of this post
+     * @param text the content of the post
+     */
     public TextPost (Date postingDate, TextArea text) {
         super(postingDate);
         this.text = text;
 
         stackPane = new StackPane();
 
+        // white box which appears to contain the date
         Rectangle dateBox = new Rectangle();
         dateBox.setFill(Color.WHITESMOKE);
         dateBox.setWidth(150);
         dateBox.setHeight(60);
 
+        // text displaying the date
         Text date = new Text(super.formatDate());
         date.setFont(new Font(25));
         date.setWrappingWidth(150);
 
+        // white box which appears to contain the number of likes and the like image
         Rectangle likeBox = new Rectangle();
         likeBox.setFill(Color.WHITESMOKE);
         likeBox.setWidth(100);
         likeBox.setHeight(40);
 
+        // the classic Facebook thumbs up image
         Photo likeImage = new Photo("buttons/facebook_like.png", 40);
         likeImage.setAlignment(Pos.BOTTOM_LEFT);
 
+        // numlikes hoverProperty is set to display a list of all people who liked the posts
         numLikes = new Text("0");
         numLikes.setFont(new Font(40));
         numLikes.hoverProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean show) -> {
@@ -62,6 +76,7 @@ public class TextPost extends Post {
         likeImage.setSpacing(15);
         likeImage.getChildren().add(numLikes);
 
+        // places all nodes in the correct alignment
         StackPane.setAlignment(likeBox, Pos.BOTTOM_LEFT);
         StackPane.setAlignment(dateBox, Pos.BOTTOM_RIGHT);
         StackPane.setAlignment(date, Pos.BOTTOM_RIGHT);
@@ -70,15 +85,29 @@ public class TextPost extends Post {
         this.getChildren().add(stackPane);
     }
 
+    /**
+     * Constructor for TextPost
+     * This constructor is used for copying a TextPost
+     * When a copy of a TextPost is required because the original cannot be used, this constructor is used
+     * @param post TextPost to be copied
+     */
     public TextPost(TextPost post) {
         super(post.getPostingDate());
         this.setStackPane(post.getStackPane());
     }
 
+    /**
+     * Getter for text
+     * @return text
+     */
     public TextArea getText() {
         return text;
     }
 
+    /**
+     * Sets up an HBox of how this post should look inside of a timeline
+     * @return HBox timeline view of the post
+     */
     @Override
     public HBox timelineView() {
         HBox view = new HBox();
@@ -106,11 +135,21 @@ public class TextPost extends Post {
         return view;
     }
 
+    /**
+     * Adds a comment to this post
+     * @param person person who left the comment
+     * @param comment comment
+     */
     @Override
     public void addComment(Person person, String comment) {
         text.addComment(person, comment);
     }
 
+    /**
+     * Adds multiple comments to this post
+     * @param people list of people who left the comments
+     * @param comments comments
+     */
     @Override
     public void addComments(Person[] people, String[] comments) {
         text.addComments(people, comments);
@@ -127,10 +166,18 @@ public class TextPost extends Post {
         numLikes.setText(Integer.toString(super.getNumLikes()));
     }
 
+    /**
+     * Getter for stackPane
+     * @return stackPane
+     */
     public StackPane getStackPane() {
         return stackPane;
     }
 
+    /**
+     * Setter for stackPane
+     * @param s StackPane to be set to
+     */
     public void setStackPane(StackPane s) {
         stackPane = s;
         this.getChildren().add(stackPane);

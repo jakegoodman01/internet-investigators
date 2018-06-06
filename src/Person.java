@@ -13,6 +13,13 @@ public class Person {
     private Map<String, String> hints;
     private boolean isPredator;
 
+    /**
+     * Constructor for Person
+     * Initializes fields photos, friends and hints to their class' default constructor
+     * Initializes timeline to new Timeline with this Person instance
+     * name is assigned to given name
+     * @param name the first name of the person
+     */
     public Person(String name) {
         this.name = name;
         this.photos = new ArrayList<>();
@@ -79,17 +86,33 @@ public class Person {
      */
     public Map<String, String> getHints() { return hints; }
 
+    /**
+     * Setter for bio
+     * @param bio new bio to be set
+     */
     public void setBio(String bio) {
         this.bio = bio;
     }
 
+    /**
+     * Setter for profilePic
+     * @param profilePic new profilePic to be set
+     */
     public void setProfilePic(Photo profilePic) {
         this.profilePic = new Photo(profilePic.getLink(), 100, true);
     }
 
+    /**
+     * setter for isPredator
+     * @param predator boolean value for isPredator
+     */
     public void setPredator(boolean predator) {
         isPredator = predator;
     }
 
+    /**
+     * Getter for isPredator
+     * @return isPredator
+     */
     public boolean isPredator() { return isPredator; }
 }

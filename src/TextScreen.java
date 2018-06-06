@@ -69,8 +69,8 @@ public class TextScreen extends StackPane {
     public void screen(String lines[][], int size, int[] rowsAbove, int scene)
     {
         this.getChildren().removeAll();
-        boxes = new ArrayList<ArrayList<Rectangle>>(); // contains all the boxes covering the letters
-        panes = new ArrayList<ArrayList<StackPane>>(); // the panes containing both the boxes and text
+        boxes = new ArrayList<>(); // contains all the boxes covering the letters
+        panes = new ArrayList<>(); // the panes containing both the boxes and text
         this.getChildren().add(new Rectangle(500, 550, Color.BLACK)); // background black box
         int counter = 0;
         rows = new VBox(10);

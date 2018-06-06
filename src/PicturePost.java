@@ -23,7 +23,6 @@ public class PicturePost extends Post {
 
     /**
      * Calls super constructor with given Date
-     * timelineView is initialized to the same photo link as the given Photo, but with height of 100
      * photo is initialized to given Photo
      * Sets up view for a picture post which contains: box to display the date, box to display the number of likes,
      *                                                 and a list of the people who liked the post is displayed upon
@@ -33,7 +32,6 @@ public class PicturePost extends Post {
      */
     public PicturePost (Date postingDate, Photo photo) {
         super(postingDate);
-
 
         this.stackPane = new StackPane();
         this.photo = photo;
@@ -88,6 +86,12 @@ public class PicturePost extends Post {
         this.getChildren().add(this.stackPane);
     }
 
+    /**
+     * Constructor for PicturePost
+     * This constructor is used for copying a PicturePost
+     * When a copy of a PicturePost is required because the original cannot be used, this constructor is used
+     * @param post PicturePost to be copied
+     */
     public PicturePost(PicturePost post) {
         super(post.getPostingDate());
         this.setStackPane(post.getStackPane());
@@ -103,15 +107,15 @@ public class PicturePost extends Post {
 
     /**
      * Getter for photo
-     * @return
+     * @return photo
      */
     public Photo getPhoto() {
         return photo;
     }
 
     /**
-     * Getter for timelineView
-     * @return
+     * Sets up an HBox of how this post should look inside of a timeline
+     * @return HBox timeline view of the post
      */
     @Override
     public HBox timelineView() {
@@ -172,10 +176,18 @@ public class PicturePost extends Post {
         numLikes.setText(Integer.toString(super.getNumLikes()));
     }
 
+    /**
+     * Getter for stackPane
+     * @return stackPane
+     */
     public StackPane getStackPane() {
         return stackPane;
     }
 
+    /**
+     * Setter for stackPane
+     * @param s StackPane to be set to
+     */
     public void setStackPane(StackPane s) {
         stackPane = s;
         this.getChildren().add(stackPane);

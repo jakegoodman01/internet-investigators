@@ -2,13 +2,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
-/**
- * @author Jake Goodman
- * @since 2018-05-14
- * @version 1
- *
- * Time spent: 4 hours
- */
 public class Photo extends HBox {
     private ImageView imageView;
     private Image image;
@@ -16,7 +9,7 @@ public class Photo extends HBox {
     private String link;
 
     /**
-     * Most basic contructor for Photo
+     * Most basic constructor for Photo
      * Assigns given String to link
      * image initialized to new Image with given link
      * imageView initialized to new ImageView with newly created Image
