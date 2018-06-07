@@ -3,6 +3,9 @@ import javafx.animation.Timeline;
 import javafx.scene.layout.HBox;
 import javafx.util.Duration;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 /**
@@ -16,7 +19,7 @@ import java.util.ArrayList;
  * with a typewriter animation.
  */
 
-public class Briefing1 extends TextScreen{
+public class Briefing1 extends TextScreen {
     Pinboard pinboard;
 
     /**
@@ -26,11 +29,16 @@ public class Briefing1 extends TextScreen{
     public Briefing1()
     {
         super();
-        BackgroundMusic bm = new BackgroundMusic(); // new object of BackgroundMusic
-        pinboard = new Pinboard(1, "profile", "",  new ArrayList<HBox>());
-        BackgroundMusic.start();
-        Main.setStage(pinboard, 750, 600);
-/*
+
+        BackgroundMusic bm = new BackgroundMusic();
+
+        try {
+            PrintWriter writer = new PrintWriter(new FileWriter("Score.txt"));
+            writer.println("1");
+            writer.close();
+        } catch (IOException e) {}
+
+
         String[][][] lines = {{{"Log 2."}, {"TUESDAY", "September 19, 2017"}, {"Today I investigate the chess team."},
                 {"I suspect that one of 3 people from the club", "isn't who they say they are."}, {"Report the predator."}}};
         int[][] rowsAbove = {{1, 1, 2, 1, 3}};
@@ -43,15 +51,15 @@ public class Briefing1 extends TextScreen{
             }
         }
 
+        pinboard = new Pinboard(1, "profile", "", new ArrayList<HBox>());
+
         Timeline timeline = new Timeline();
         timeline.getKeyFrames().addAll(new KeyFrame(Duration.millis(0), e -> screen(lines[0], 12, rowsAbove[0], 1)),
                 new KeyFrame(Duration.millis(43000), e -> {}));
         timeline.setOnFinished(e -> {
-            this.getChildren().clear();
-            BackgroundMusic.start();
             Main.setStage(pinboard, 750, 600);
         });
-        timeline.play();*/
+        timeline.play();
 
     }
 

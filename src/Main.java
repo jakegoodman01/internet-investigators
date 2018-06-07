@@ -1,7 +1,6 @@
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
@@ -12,7 +11,7 @@ public class Main extends Application {
     public static Group root;
 
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws Exception{
         pStage = primaryStage;
         root = new Group();
 
@@ -21,15 +20,10 @@ public class Main extends Application {
         pStage.setHeight(550);
         pStage.setWidth(500);
         pStage.setResizable(false);
-/*
-        root.getChildren().add(new MainMenu());
-        root.getChildren().add(new Splashscreen());*/
-        //root.getChildren().add(new Briefing1());
-        //root.getChildren().add(new FinalResults());
 
-        BackgroundMusic bm = new BackgroundMusic();
-        BackgroundMusic.start();
-        setStage(new Pinboard(1, "profile", "", new ArrayList<HBox>()), 750, 600);
+        root.getChildren().add(new MainMenu());
+        /*root.getChildren().add(new Splashscreen());
+        root.getChildren().add(new Briefing1());*/
 
         pStage.show();
     }

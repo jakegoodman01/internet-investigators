@@ -18,6 +18,7 @@ public abstract class Post extends HBox {
      */
     public Post(Date postingDate) {
         super();
+        this.setMaxHeight(300);
         this.postingDate = postingDate;
         numLikes = 0;
         peopleLiked = new ArrayList<>();

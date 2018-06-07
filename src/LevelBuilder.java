@@ -7,7 +7,26 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-
+/**
+ * @author Jake Goodman
+ * @since 2018-05-10
+ * @version 3 (current version)
+ *
+ * Version 3:
+ * Date: 2018-05-20
+ * Description: BIG refactoring of this file. I ran into many issues while trying to implement a way to
+ *              describe liking and commenting in level description files so the way that level description files were
+ *              written was redesigned to allow for liking and commenting posts
+ *
+ * Version 2:
+ * Date: 2018-05-15
+ * Description: Implemented hints for bio and posts
+ *
+ * Version 1:
+ * Date: 2018-05-10
+ * Description: Designed how the level description files and package organization should work. Worked with all
+ *              profile related classes and made everything work together better.
+ */
 public class LevelBuilder {
 
     private List<Person> persons = new ArrayList<>();
@@ -41,13 +60,16 @@ public class LevelBuilder {
             boolean readBio = false; // indicates weather the bio is currently being read
             boolean readTimeline = false; // indicates weather the timeline is currently being read
             boolean picturePost = false; // indicates weather a PicturePost is currently being created
-            boolean isPredator = false;
+            boolean isPredator = false; // indicates weather the current person being read is a predator
             String photoLink = null; // link to a photo
             Post post = null; // the most recent created Post
-            Date date = null;
-            boolean firstLine = true;
-            int pIndex = -1;
+            Date date = null; // the date of the current Post
+            boolean firstLine = true; // only true on the first pass of the while loop
+            int pIndex = -1; // keeps track of the person currently being read
+
+            // keep reading as long as there are lines to read
             while ((line = br.readLine()) != null) {
+                // if we are on the first line, create the appropriate persons for the level
                 if (firstLine) {
                     String[] names = line.split(",");
                     for (String s : names) {
@@ -95,6 +117,7 @@ public class LevelBuilder {
                         break;
                     case 3:
                         if (date == null) {
+                            // format the date with Calendar class
                             String dateLine = line.substring(12);
                             int month = Integer.valueOf(dateLine.substring(0, 2));
                             int day = Integer.valueOf(dateLine.substring(3, 5));
@@ -142,11 +165,13 @@ public class LevelBuilder {
                         break;
                     case 4:
                         if (line.substring(16, 22).equals("Likes:")) {
+                            // Add likes for this post by the people indicated in the description
                             String[] peopleLiked = line.substring(22).split(",");
                             for (String str : peopleLiked) {
                                 post.addLike(personMap.get(str));
                             }
                         } else {
+                            // Add comments as specified by the level description
                             String[] peopleCommented = line.substring(25).split(",");
                             for (String str : peopleCommented) {
                                 String[] comment = str.split(":");
@@ -191,7 +216,7 @@ public class LevelBuilder {
                 }
             }
         } catch (IOException ioe) {
-            System.out.printf("Error reading from file: %s%n", file);
+            ioe.printStackTrace();
         }
 
         // Adds all friends to all people, so everybody is friends with everybody

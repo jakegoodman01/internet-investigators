@@ -15,7 +15,7 @@ public class Splashscreen extends StackPane {
         background.getChildren().add(r);
 
         StackPane foreground = new StackPane();
-        Photo logo = new Photo("screens/ICS ISP Logo Final.png", 400);
+        Photo logo = new Photo("buttons/ICS ISP Logo Final.png", 400);
         logo.setOpacity(0);
         foreground.setPadding(new Insets(50, 0, 0, 100));
         foreground.getChildren().add(logo);

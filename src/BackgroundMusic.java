@@ -25,7 +25,7 @@ public class BackgroundMusic
     private static Clip clip;
 
     /**
-     * No parameter constructor, reads from a file and opens and creates a clip
+     * Default constructor, reads from a file, opens and creates a clip
      */
     public BackgroundMusic()
     {

@@ -166,7 +166,7 @@ Wilson, Normal:
 
     friends:Nothing interesting here
 
-    profilePic:That's a watermark! Violet had one two! I'm so confused.
+    profilePic:That's a watermark! Violet had one two! I'm so confused. Maybe look it up and see!
 
     Timeline:
         TextPost:Is he club president?

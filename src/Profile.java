@@ -15,6 +15,9 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 /**
@@ -110,12 +113,34 @@ public class Profile extends StackPane {
                       guess, close the stage, reset the stage to the next level
                      */
                     yes.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
-                        if (person.isPredator())
-                            FinalResults.addWin();
-                        else
-                            FinalResults.addLoss();
+                        BackgroundMusic.stop();
+                        try {
+                            PrintWriter writer = new PrintWriter(new FileWriter("WinsLosses.txt"));
+                            if (person.isPredator()) {
+                                FinalResults.addWin();
+                            }
+                            else {
+                                FinalResults.addLoss();
+                            }
+                            writer.println(FinalResults.getWins() + " " + FinalResults.getLosses());
+                            writer.close();
+                        } catch (IOException e2)
+                        {
+                        }
+
                         stage.close();
-                        Main.setStage(new FinalResults(), 550, 500);
+                        switch (levelNum)
+                        {
+                            case 1:
+                                Main.setStage(new Scene(new Briefing2()), 550, 500);
+                                break;
+                            case 3:
+                                Main.setStage(new Scene(new Briefing4()), 550, 500);
+                                break;
+                            case 6:
+                                Main.setStage(new FinalResults(), 550, 500);
+                                break;
+                        }
                     });
 
                     // Simply close the stage upon clicking the no button
@@ -179,8 +204,8 @@ public class Profile extends StackPane {
                     helpStage.initStyle(StageStyle.UNDECORATED);
 
                     Photo profileHelp = new Photo("buttons/help/ProfileHelp.png"); // This image has helpful
-                                                                                        // profile related help for the
-                                                                                        // user to refer to
+                    // profile related help for the
+                    // user to refer to
                     Photo closeButton = new Photo("buttons/ExitButton.png");
                     exit1.getChildren().add(closeButton);
 
@@ -230,11 +255,16 @@ public class Profile extends StackPane {
                     // Upon clicking toMainMenu, background music terminates and stage switches to new MainMenu
                     toMainMenu.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
                         BackgroundMusic.stop();
+                        hwStage.close();
                         Main.setStage(new Scene(new MainMenu()), 550, 500);
                     });
 
                     // Upon clicking quitGame, program terminates
-                    quitGame.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> System.exit(0));
+                    quitGame.addEventHandler(MouseEvent.MOUSE_CLICKED, e ->
+                    {
+                        hwStage.close();
+                        System.exit(0);
+                    });
 
                     /*
                       If background music is not playing, soundOff button is displaying.
@@ -362,20 +392,26 @@ public class Profile extends StackPane {
                     friends.setMinHeight(43 * 5 / 2);
                     friends.setMinWidth(45 * 3 - 20);
 
-                    ListView<String> list = new ListView<>();
-                    ObservableList<String> items = FXCollections.observableArrayList();
-                    // items is populated with all friends of person
-                    for (Person p : person.getFriends()) {
-                        items.add(p.getName());
-                    }
-                    list.setItems(items);
+                    VBox list = new VBox();
 
                     // This scene contains a ListView of all friends of person
-                    Scene scene2 = new Scene(list);
+                    Scene scene2 = new Scene(list, 300, 500);
                     Stage stage2 = new Stage();
                     stage2.setTitle("Friends");
                     stage2.setScene(scene2);
                     stage2.setResizable(false);
+
+                    // list is populated with all friends of person
+                    for (Person p : person.getFriends()) {
+                        Button friend = new Button(p.getName());
+                        friend.setMinWidth(300);
+                        friend.setMinHeight(100);
+                        friend.setOnAction(e -> {
+                            Main.setStage(new Scene(new Profile(p, levelNum)), 750, 600);
+                            stage2.close();
+                        });
+                        list.getChildren().add(friend);
+                    }
 
                     // stage2 is displayed upon clicking friends
                     friends.setOnAction(e -> stage2.show());
