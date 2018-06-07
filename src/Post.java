@@ -3,7 +3,18 @@ import javafx.scene.layout.HBox;
 import java.util.Date;
 import java.util.ArrayList;
 
-
+/**
+ * @author Jake Goodman
+ * @since 2018-05-13
+ * @version 1 (current version)
+ *
+ * Version 1:
+ * Author: Jake Goodman
+ * Date: 2018-05-13
+ * Description: Super class of PicturePost and TextPost contains code that would have been duplicated between both
+ *              classes. This class mainly deals with formatting of the date and the clone method
+ * Time spent: 1.5 hours
+ */
 public abstract class Post extends HBox {
     private Date postingDate;
     private int numLikes;

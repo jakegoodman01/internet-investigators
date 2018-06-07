@@ -15,7 +15,18 @@ import javafx.scene.text.TextAlignment;
 
 import java.util.Date;
 
-
+/**
+ * @author Jake Goodman
+ * @since 2018-05-13
+ * @version 1 (current version)
+ *
+ * Version 1:
+ * Author: Jake Goodman
+ * Date: 2018-05-13
+ * Description: Basic functionality of PicturePost, with date and likes working. Modifications have been made
+ *              over the days but no big refactoring of the file that it would call for a new version!
+ * Time spent: 5 hours
+ */
 public class PicturePost extends Post {
     private Photo photo;
     private Text numLikes;

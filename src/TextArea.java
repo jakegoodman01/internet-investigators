@@ -11,6 +11,13 @@ import javafx.scene.text.*;
  * @since 2018-05-15
  * @version 1
  *
+ * Version 1:
+ * Author: Jake Goodman
+ * Date: 2018-05-13
+ * Description: The text area where captions and comments are located. This has been modified throughout the whole
+ *              project but there has been no durastic refactoring that is worth a new version
+ * Time spent: 5 hours
+ *
  * Time spent on profile related classes: 7 hours
  * */
 public class TextArea extends ScrollPane {

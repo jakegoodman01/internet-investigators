@@ -2,6 +2,17 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
+/**
+ * @author Jake Goodman
+ * @since 2018-05-13
+ * @version 1 (current version)
+ *
+ * Version 1:
+ * Author: Jake Goodman
+ * Date: 2018-05-13
+ * Description: This class is very similar to an ImageView class, but it can have comments, a text area and likes
+ * Time spent: 1 hour
+ */
 public class Photo extends HBox {
     private ImageView imageView;
     private Image image;

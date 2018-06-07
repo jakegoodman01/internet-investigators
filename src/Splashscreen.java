@@ -5,7 +5,17 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
-
+/**
+ * @author Nathan Henry
+ * @since 2018-05-13
+ * @version 1 (current version)
+ *
+ * Version 1:
+ * Author: Jake Goodman
+ * Date: 2018-05-13
+ * Description: Splash screen upon entering program
+ * Time spent: 20 minutes
+ */
 public class Splashscreen extends StackPane {
     public Splashscreen()
     {

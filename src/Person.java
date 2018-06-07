@@ -3,6 +3,25 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author Jake Goodman
+ * @since 2018-05-13
+ * @version 2 (current version)
+ *
+ * Version 2:
+ * Author: Jake Goodman
+ * Date: 2018-05-20
+ * Description: Added fields hints and isPredator. Also modified the class so it would work with only
+ *              the name given on construction. This was to accommodate LevelBuilder at version 3.
+ * Time spent: 1 hour
+ *
+ * Version 1:
+ * Author: Jake Goodman
+ * Date: 2018-05-13
+ * Description: Person has fields: name, bio, profilePic, photos, timeline, friends.
+ *              setup getters and setters for a person in its most basic form
+ * Time spent: 5 hours
+ */
 public class Person {
     private String name;
     private String bio;
