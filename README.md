@@ -28,7 +28,7 @@ and proceed to the next level.
 
 ![Profile Page](src/resources/readme/profile.png "Profile Page")
 ![Picture Post](src/resources/readme/post.png "Picture Post")
-![Main Game Screen](src/resources/readme/pinboardg.png "Main Game Screen")
+![Main Game Screen](src/resources/readme/pinboard.png "Main Game Screen")
 
 
 Chat levels
